@@ -2614,3 +2614,458 @@ h1 {
     transform: none;
   }
 }
+
+/* ==========================================================================
+   TELECOM GRAPHIC REFINEMENT / STAGE FIT & LAYER EMPHASIS
+   Append after the existing stylesheet.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01 / DESKTOP GRAPHIC WINDOW
+   Explicitly constrain both the flex area and the SVG viewport.
+   -------------------------------------------------------------------------- */
+
+.capability-story {
+  align-items: start;
+}
+
+.capability-stage {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  height: clamp(
+    380px,
+    calc(100svh - var(--header-height) - 48px),
+    700px
+  );
+
+  overflow: hidden;
+  isolation: isolate;
+
+  background: #172a35;
+  color: #c8d8e2;
+
+  border: 1px solid rgb(185 209 225 / 12%);
+}
+
+/* Remove the old decorative moving side indicator. */
+
+.capability-stage::after {
+  display: none;
+}
+
+.stage-topline,
+.stage-footer {
+  position: relative;
+  z-index: 2;
+
+  flex: 0 0 auto;
+  min-width: 0;
+
+  margin-inline: 24px;
+
+  color: #c8d6df;
+  border-color: rgb(200 218 230 / 18%);
+}
+
+.stage-topline {
+  padding-block: 19px;
+}
+
+.stage-topline > span:first-child {
+  color: #b0c3cf;
+}
+
+.stage-count {
+  color: #d5e1e8;
+}
+
+.stage-footer {
+  padding-block: 19px;
+}
+
+.stage-label {
+  color: #d5e1e8;
+}
+
+.stage-progress {
+  background: rgb(200 218 230 / 19%);
+}
+
+.stage-progress > span {
+  background: #aac7db;
+}
+
+/*
+ * A zero flex-basis and min-height: 0 prevent the intrinsic SVG dimensions
+ * from forcing the drawing below the visible stage.
+ */
+
+.stage-artwork {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 1 1 0%;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  padding: 12px 14px 16px;
+  overflow: hidden;
+}
+
+.stage-assembly {
+  display: block;
+
+  flex: 1 1 auto;
+  align-self: stretch;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  color: #c2d6e3;
+  overflow: hidden;
+
+  transform: none;
+  transition: none;
+}
+
+/* Override every previous whole-illustration zoom state. */
+
+.capability-stage[data-active-discipline="design"] .stage-assembly,
+.capability-stage[data-active-discipline="permitting"] .stage-assembly,
+.capability-stage[data-active-discipline="construction"] .stage-assembly {
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   02 / CONTROLLED LAYER MOTION
+   All three disciplines remain readable.
+   -------------------------------------------------------------------------- */
+
+.capability-stage .assembly-design,
+.capability-stage .assembly-frame,
+.capability-stage .assembly-foundation {
+  transform-box: view-box;
+  transform-origin: center;
+
+  opacity: 1;
+  transform: none;
+
+  transition:
+    transform 900ms var(--ease-out),
+    opacity 650ms var(--ease-out);
+}
+
+/* Design: a small separation, not a camera zoom. */
+
+.capability-stage[data-active-discipline="design"] .assembly-design {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+.capability-stage[data-active-discipline="design"] .assembly-frame {
+  opacity: 0.76;
+  transform: none;
+}
+
+.capability-stage[data-active-discipline="design"] .assembly-foundation {
+  opacity: 0.8;
+  transform: translateY(5px);
+}
+
+/* Coordination: keep the middle plane centered and legible. */
+
+.capability-stage[data-active-discipline="permitting"] .assembly-design {
+  opacity: 0.8;
+  transform: translateY(-12px);
+}
+
+.capability-stage[data-active-discipline="permitting"] .assembly-frame {
+  opacity: 1;
+  transform: none;
+}
+
+.capability-stage[data-active-discipline="permitting"] .assembly-foundation {
+  opacity: 0.8;
+  transform: translateY(8px);
+}
+
+/* Installation: separate the upper planes without hiding them. */
+
+.capability-stage[data-active-discipline="construction"] .assembly-design {
+  opacity: 0.76;
+  transform: translateY(-14px);
+}
+
+.capability-stage[data-active-discipline="construction"] .assembly-frame {
+  opacity: 0.76;
+  transform: translateY(-5px);
+}
+
+.capability-stage[data-active-discipline="construction"] .assembly-foundation {
+  opacity: 1;
+  transform: none;
+}
+
+/* Registration is context, not a competing graphic. */
+
+.capability-stage .assembly-reference {
+  opacity: 0.65;
+}
+
+/* --------------------------------------------------------------------------
+   03 / BLUEPRINT DETAILS
+   Hooks used by the upcoming SVG revision.
+   -------------------------------------------------------------------------- */
+
+.blueprint-grid {
+  opacity: 0.7;
+}
+
+.design-primary-alignment {
+  stroke-dasharray: none;
+}
+
+.capability-stage .engineering-dimensions,
+.capability-stage .engineering-access-points {
+  transition: opacity 650ms var(--ease-out);
+}
+
+.capability-stage[data-active-discipline="design"]
+  .engineering-dimensions,
+.capability-stage[data-active-discipline="design"]
+  .engineering-access-points {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   04 / COORDINATION DETAILS
+   A local alignment action, not a guarantee-of-approval animation.
+   -------------------------------------------------------------------------- */
+
+.coordination-work-boundary {
+  stroke-dasharray: 5 4;
+  stroke-dashoffset: 0;
+
+  transition:
+    stroke-dashoffset 900ms var(--ease-out),
+    stroke-opacity 650ms var(--ease-out);
+}
+
+.capability-stage[data-active-discipline="permitting"]
+  .coordination-work-boundary {
+  stroke-dashoffset: -9;
+  stroke-opacity: 1;
+}
+
+.coordination-clearance,
+.coordination-existing-service {
+  opacity: 0.75;
+  transition: opacity 650ms var(--ease-out);
+}
+
+.capability-stage[data-active-discipline="permitting"]
+  .coordination-clearance,
+.capability-stage[data-active-discipline="permitting"]
+  .coordination-existing-service {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   05 / STABLE LABELS
+   The revised SVG will place these outside the animated layer groups.
+   -------------------------------------------------------------------------- */
+
+.assembly-labels {
+  pointer-events: none;
+}
+
+.assembly-labels text {
+  fill: #d4dfe5;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+}
+
+.assembly-labels path {
+  fill: none;
+  stroke: #a9bfce;
+  stroke-width: 1;
+  stroke-opacity: 0.65;
+}
+
+/* --------------------------------------------------------------------------
+   06 / TABLET
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .capability-stage {
+    top: calc(var(--header-height) + 16px);
+
+    height: clamp(
+      360px,
+      calc(100svh - var(--header-height) - 32px),
+      580px
+    );
+
+    min-height: 0;
+  }
+
+  .stage-topline,
+  .stage-footer {
+    margin-inline: 17px;
+    padding-block: 16px;
+    font-size: 8px;
+  }
+
+  .stage-artwork {
+    padding: 10px 6px 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   07 / SHORT DESKTOP WINDOWS
+   Allow the entire stage to fit below the header.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 641px) and (max-height: 650px) {
+  .capability-stage {
+    top: calc(var(--header-height) + 12px);
+
+    height: max(
+      240px,
+      calc(100svh - var(--header-height) - 24px)
+    );
+
+    min-height: 0;
+    max-height: 540px;
+  }
+
+  .stage-topline,
+  .stage-footer {
+    padding-block: 12px;
+  }
+
+  .stage-artwork {
+    padding-block: 5px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   08 / MOBILE ILLUSTRATIONS
+   No crop or artificial zoom; each illustration shows the complete stack.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .capability-stage {
+    display: none;
+  }
+
+  .passage-mobile-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: auto;
+    aspect-ratio: 820 / 800;
+
+    padding: 12px 8px;
+    overflow: hidden;
+
+    background: #172a35;
+    color: #c8d8e2;
+
+    border: 1px solid rgb(185 209 225 / 12%);
+  }
+
+  .passage-mobile-art svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+
+    overflow: hidden;
+  }
+
+  [data-discipline="design"] .passage-mobile-art svg,
+  [data-discipline="permitting"] .passage-mobile-art svg,
+  [data-discipline="construction"] .passage-mobile-art svg {
+    transform: none;
+  }
+
+  [data-discipline] .passage-mobile-art .assembly-design,
+  [data-discipline] .passage-mobile-art .assembly-frame,
+  [data-discipline] .passage-mobile-art .assembly-foundation {
+    transform: none;
+    opacity: 0.8;
+  }
+
+  [data-discipline="design"]
+    .passage-mobile-art .assembly-design {
+    opacity: 1;
+  }
+
+  [data-discipline="permitting"]
+    .passage-mobile-art .assembly-frame {
+    opacity: 1;
+  }
+
+  [data-discipline="construction"]
+    .passage-mobile-art .assembly-foundation {
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   09 / REDUCED MOTION
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .capability-stage .assembly-design,
+  .capability-stage .assembly-frame,
+  .capability-stage .assembly-foundation {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .coordination-work-boundary {
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+
+  .stage-progress > span {
+    transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10 / PRINT
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .capability-stage,
+  .passage-mobile-art {
+    display: none !important;
+  }
+}
