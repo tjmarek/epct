@@ -90,21 +90,20 @@
         <stop offset="1" stop-color="#1b303e"/>
       </linearGradient>
 
-  <!--
-  THREE-LAYER TELECOM DELIVERY STUDY
+<!--
+  Conceptual telecom delivery illustration.
+  Not to scale and not an engineering detail.
 
-  All three layers use the same conceptual alignment.
-  Engineering: base drawing coordinates.
-  Permitting:  drawing coordinates shifted down 135 units.
-  Installation: drawing coordinates shifted down 270 units.
-
-  Illustrative only. Not to scale.
-  Boundaries, dimensions, and components are conceptual.
+  Shared animation groups:
+  .assembly-design
+  .assembly-frame
+  .assembly-foundation
 -->
-<symbol id="infrastructure-assembly" viewBox="0 0 820 760">
+<symbol id="infrastructure-assembly" viewBox="0 0 820 800">
 
   <!-- ================================================================
-       REGISTRATION / SHARED LOCATIONS THROUGH THE STACK
+       REGISTRATION
+       Two quiet references connect corresponding project locations.
        ================================================================ -->
   <g
     class="assembly-reference"
@@ -112,620 +111,620 @@
     stroke="#a9bfce"
     stroke-width="1"
   >
-    <!-- Access point -->
     <path
-      class="registration-line"
-      d="M460 220V490"
-      stroke-dasharray="3 7"
-      opacity=".48"
-    />
-
-    <!-- Alignment turn -->
-    <path
-      class="registration-line"
-      d="M300 300V570"
-      stroke-dasharray="3 7"
+      d="M470 220V546"
+      stroke-dasharray="3 8"
       opacity=".3"
     />
-
-    <!-- Route termination -->
     <path
-      class="registration-line"
-      d="M650 245V515"
-      stroke-dasharray="3 7"
-      opacity=".3"
+      d="M650 250V576"
+      stroke-dasharray="3 8"
+      opacity=".22"
     />
-
-    <!-- Ground reference -->
-    <path d="M82 562L420 731L744 569" opacity=".16"/>
-    <path d="M420 731V747" opacity=".3"/>
+    <path d="M115 639L420 791L736 633" opacity=".13"/>
   </g>
 
   <!-- ================================================================
-       03 / INSTALLATION
-       A physical cutaway following the alignment above.
+       INSTALLATION
+       Open excavation, conduit bundle, and access chamber.
        ================================================================ -->
   <g class="assembly-foundation">
 
     <!-- Ground block -->
     <path
-      d="M100 500L420 660V702L100 542Z"
-      fill="#3b5360"
+      d="M135 530L420 673V729L135 586Z"
+      fill="#435b67"
     />
     <path
-      d="M420 660L720 510V552L420 702Z"
-      fill="#203744"
+      d="M420 673L720 523V579L420 729Z"
+      fill="#253e4c"
     />
     <path
-      d="M100 500L400 350L720 510L420 660Z"
-      fill="#607783"
+      d="M135 530L435 380L720 523L420 673Z"
+      fill="#6c828c"
     />
 
-    <!-- Surface context -->
-    <path
-      d="M215 558L515 408L585 443L285 593Z"
-      fill="#71838b"
-      fill-opacity=".6"
-    />
-
+    <!-- Restrained soil strata on cut faces -->
     <g
       fill="none"
-      stroke="#b1c0c7"
+      stroke="#b0bfc5"
+      stroke-opacity=".18"
       stroke-width="1"
-      stroke-opacity=".24"
     >
-      <path d="M100 514L420 674L720 524"/>
-      <path d="M100 528L420 688L720 538"/>
+      <path d="M135 548L420 691L720 541"/>
+      <path d="M135 567L420 710L720 560"/>
     </g>
 
-    <!-- Excavated route: matches the drawing alignment -->
+    <!-- Excavation opening follows the telecom alignment -->
     <path
-      d="M180 510L300 570L460 490L580 550L650 515"
+      class="trench-opening"
+      d="M210 550L310 600L470 520L590 580L650 550"
       fill="none"
-      stroke="#263f4d"
-      stroke-width="32"
+      stroke="#1b303c"
+      stroke-width="49"
       stroke-linecap="butt"
       stroke-linejoin="round"
     />
 
-    <!-- Inner trench -->
+    <!-- Recessed floor -->
     <path
-      d="M180 510L300 570L460 490L580 550L650 515"
+      class="trench-floor"
+      d="M210 576L310 626L470 546L590 606L650 576"
       fill="none"
-      stroke="#152c39"
-      stroke-width="22"
+      stroke="#344c57"
+      stroke-width="29"
       stroke-linecap="butt"
       stroke-linejoin="round"
     />
 
-    <!-- Conduit -->
+    <!-- Far excavation wall -->
     <path
-      class="installed-conduit"
-      d="M180 510L300 570L460 490L580 550L650 515"
-      fill="none"
-      stroke="#c3cfd4"
-      stroke-width="13"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      d="M199 531L310 587L470 507L590 567L639 531
+         V557L590 593L470 533L310 613L199 557Z"
+      fill="#536b76"
     />
 
-    <!-- Fiber shown within the conceptual cutaway -->
+    <!-- Near excavation wall -->
     <path
-      class="installed-fiber"
-      d="M180 510L300 570L460 490L580 550L650 515"
-      fill="none"
-      stroke="#365e79"
-      stroke-width="5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      d="M221 569L310 613L470 533L590 593L661 569
+         V595L590 619L470 559L310 639L221 595Z"
+      fill="#213945"
     />
 
-    <path
-      d="M180 508L300 568L460 488L580 548L650 513"
+    <!-- Excavation lips -->
+    <g
       fill="none"
-      stroke="#edf3f5"
+      stroke="#a1b2b9"
+      stroke-width="1.2"
       stroke-opacity=".65"
-      stroke-width="1"
+      stroke-linejoin="round"
+    >
+      <path d="M199 531L310 587L470 507L590 567L639 531"/>
+      <path d="M221 569L310 613L470 533L590 593L661 569"/>
+    </g>
+
+    <!-- Three coordinated conduit runs, with softened transitions -->
+    <g
+      class="conduit-bundle"
+      fill="none"
       stroke-linecap="round"
       stroke-linejoin="round"
-    />
+    >
+      <!-- Bedding shadow -->
+      <path
+        d="M210 578L300 623Q310 628 320 623
+           L460 553Q470 548 480 553
+           L580 603Q590 608 600 603L650 578"
+        stroke="#142b37"
+        stroke-width="25"
+      />
 
-    <!-- Access structure at the same registered location as the plan -->
-    <g class="installed-access">
+      <!-- Rear conduit -->
       <path
-        d="M430 465L460 480V515L430 500Z"
-        fill="#a4b4bc"
+        d="M210 570L300 615Q310 620 320 615
+           L460 545Q470 540 480 545
+           L580 595Q590 600 600 595L650 570"
+        stroke="#a9bcc6"
+        stroke-width="6"
       />
+
+      <!-- Middle conduit -->
       <path
-        d="M460 480L490 465V500L460 515Z"
-        fill="#617d8e"
+        d="M210 577L300 622Q310 627 320 622
+           L460 552Q470 547 480 552
+           L580 602Q590 607 600 602L650 577"
+        stroke="#d2dde2"
+        stroke-width="7"
       />
+
+      <!-- Front conduit -->
       <path
-        d="M430 465L460 450L490 465L460 480Z"
-        fill="#d9e1e3"
-      />
-      <path
-        d="M438 465L460 454L482 465L460 476Z"
-        fill="#203d50"
-      />
-      <path
-        d="M444 465L460 457L476 465L460 473Z"
-        fill="#142b38"
+        class="installed-conduit"
+        d="M210 584L300 629Q310 634 320 629
+           L460 559Q470 554 480 559
+           L580 609Q590 614 600 609L650 584"
+        stroke="#7c9bb0"
+        stroke-width="6"
       />
     </g>
 
-    <!-- Visible conduit end -->
-    <ellipse
-      cx="650"
-      cy="515"
-      rx="6"
-      ry="9"
-      transform="rotate(62 650 515)"
-      fill="#294f69"
-      stroke="#d7e1e5"
-      stroke-width="2.5"
-    />
-
-    <!-- Installation annotation -->
+    <!-- Visible conduit openings at the cutaway -->
     <g
-      class="installation-annotation"
-      font-family="'DM Sans', Arial, sans-serif"
+      fill="#183547"
+      stroke="#d3dfe5"
+      stroke-width="1.8"
     >
+      <ellipse
+        cx="650" cy="570" rx="4" ry="5"
+        transform="rotate(63 650 570)"
+      />
+      <ellipse
+        cx="650" cy="577" rx="4.5" ry="5.5"
+        transform="rotate(63 650 577)"
+      />
+      <ellipse
+        cx="650" cy="584" rx="4" ry="5"
+        transform="rotate(63 650 584)"
+      />
+    </g>
+
+    <!-- Brief exposed cable / inner strands -->
+    <g
+      class="installed-fiber"
+      fill="none"
+      stroke-linecap="round"
+      stroke-width="1.4"
+    >
+      <path d="M652 577Q668 568 679 563" stroke="#c3dbe8"/>
+      <path d="M652 578Q671 573 684 571" stroke="#8fb4cb"/>
+      <path d="M652 579Q670 580 680 583" stroke="#e1e9ed"/>
+    </g>
+
+    <!-- Underground access chamber, centered on the registered location -->
+    <g class="installed-access">
+      <!-- Chamber interior -->
       <path
-        d="M548 534L619 590H738"
-        fill="none"
-        stroke="#a9bfce"
+        d="M438 511L470 495L502 511L470 527Z"
+        fill="#152c39"
+      />
+
+      <!-- Chamber walls -->
+      <path
+        d="M438 511L470 527V565L438 549Z"
+        fill="#afbec5"
+      />
+      <path
+        d="M470 527L502 511V549L470 565Z"
+        fill="#718d9e"
+      />
+
+      <!-- Open rim -->
+      <path
+        d="M432 508L470 489L508 508L470 527Z
+           M443 508L470 495L497 508L470 521Z"
+        fill="#d5dfe3"
+        fill-rule="evenodd"
+      />
+
+      <!-- Dark side-entry ports -->
+      <ellipse
+        cx="484" cy="544" rx="4" ry="5"
+        fill="#203a4b"
+        transform="rotate(25 484 544)"
+      />
+      <ellipse
+        cx="492" cy="540" rx="4" ry="5"
+        fill="#203a4b"
+        transform="rotate(25 492 540)"
+      />
+
+      <!-- Lid offset above the open chamber -->
+      <path
+        d="M430 470L466 452L502 470L466 488Z"
+        fill="#b3c3cc"
+        stroke="#dce5e9"
         stroke-width="1"
       />
-      <text
-        x="625"
-        y="610"
-        fill="#c1d0d9"
-        font-size="10"
-        font-weight="500"
-        letter-spacing=".7"
-      >CONDUIT + FIBER</text>
+      <path
+        d="M430 470V475L466 493L502 475V470L466 488Z"
+        fill="#7f99a9"
+      />
+
+      <!-- Lid detail: geometry only -->
+      <path
+        d="M449 470L466 462L483 470L466 478Z"
+        fill="none"
+        stroke="#567386"
+        stroke-width="1"
+      />
     </g>
 
-    <!-- Layer identifier -->
+    <!-- One layer label -->
     <g
       class="layer-identifier"
       font-family="'DM Sans', Arial, sans-serif"
     >
       <path
-        d="M100 542L63 561"
+        d="M40 660H94L135 640"
         fill="none"
         stroke="#a9bfce"
+        stroke-width="1"
         stroke-opacity=".65"
       />
       <text
-        x="38"
-        y="589"
-        fill="#c1d0d9"
-        font-size="10"
-        font-weight="600"
-        letter-spacing="1"
-      >03 / INSTALL</text>
+        x="40"
+        y="649"
+        fill="#d4dfe5"
+        font-size="12"
+        font-weight="500"
+        letter-spacing=".25"
+      >Installation</text>
     </g>
   </g>
 
   <!-- ================================================================
-       02 / PERMITTING
-       A complete coordination plane, not an adjacent document.
+       COORDINATION
+       Working corridor, crossing interface, and access work area.
        ================================================================ -->
   <g class="assembly-frame">
 
-    <!-- Thin physical edge establishes this as a full layer -->
+    <!-- Full overlay plane -->
     <path
-      d="M100 365L420 525V532L100 372Z"
-      fill="#567b91"
-      fill-opacity=".85"
+      d="M135 380L420 523V530L135 387Z"
+      fill="#52768c"
     />
     <path
-      d="M420 525L720 375V382L420 532Z"
-      fill="#365b73"
-      fill-opacity=".85"
+      d="M420 523L720 373V380L420 530Z"
+      fill="#2c5069"
     />
-
-    <!-- Approval / coordination overlay -->
     <path
       class="permit-plane"
-      d="M100 365L400 215L720 375L420 525Z"
-      fill="#577f98"
-      fill-opacity=".24"
-      stroke="#9db9ca"
+      d="M135 380L435 230L720 373L420 523Z"
+      fill="#6f96ae"
+      fill-opacity=".2"
+      stroke="#a9c2d1"
       stroke-width="1.2"
-      stroke-opacity=".85"
+      stroke-opacity=".8"
     />
 
-    <!-- Corridor context -->
-    <path
-      d="M215 423L515 273L585 308L285 458Z"
-      fill="#9ab7c8"
-      fill-opacity=".12"
-      stroke="#b4cbd8"
-      stroke-width="1"
-      stroke-opacity=".35"
-    />
-
-    <!-- Right-of-way envelope -->
+    <!-- Working corridor -->
     <path
       class="permit-row"
-      d="M188 409L488 259L612 321L312 471Z"
-      fill="#9abbd0"
-      fill-opacity=".16"
-      stroke="#bbd0dd"
-      stroke-width="1.4"
+      d="M225 425L525 275L603 314L303 464Z"
+      fill="#91b5ca"
+      fill-opacity=".18"
+      stroke="#c0d4e0"
+      stroke-width="1"
       stroke-dasharray="7 5"
     />
 
-    <!-- Defined crossing coordination area -->
+    <!-- Crossing interface: a second system meeting the corridor -->
     <path
-      class="permit-crossing"
-      d="M352 347L425 311L503 350L430 386Z"
-      fill="#c3d6e1"
-      fill-opacity=".22"
-      stroke="#d2e0e8"
-      stroke-width="1.5"
+      class="coordination-crossing"
+      d="M333 298L555 409L578 397L356 286Z"
+      fill="#c2d2d9"
+      fill-opacity=".17"
+      stroke="#b4c8d4"
+      stroke-width="1"
     />
 
-    <!-- Restrained crossing hatch -->
+    <!-- Restricted / coordinated intersection -->
+    <path
+      class="permit-crossing"
+      d="M372 351L424 325L479 352L427 378Z"
+      fill="#c6dae6"
+      fill-opacity=".16"
+      stroke="#cfdee7"
+      stroke-width="1.3"
+    />
+
+    <!-- Geometric intersection hatch -->
     <g
       class="permit-crossing-hatch"
       fill="none"
-      stroke="#c9dae5"
-      stroke-width="1"
-      stroke-opacity=".55"
+      stroke="#c6d8e3"
+      stroke-width=".9"
+      stroke-opacity=".45"
     >
-      <path d="M364 347L435 382"/>
-      <path d="M379 339L450 374"/>
-      <path d="M394 332L465 367"/>
-      <path d="M409 324L480 359"/>
-      <path d="M424 317L494 352"/>
+      <path d="M384 351L435 376"/>
+      <path d="M397 344L448 369"/>
+      <path d="M410 338L461 363"/>
+      <path d="M423 331L474 356"/>
     </g>
 
-    <!-- Work-area boundary surrounding the access location -->
+    <!-- Access work-area envelope -->
     <path
       class="permit-work-area"
-      d="M424 355L460 337L496 355L460 373Z"
-      fill="#a5c2d3"
-      fill-opacity=".17"
-      stroke="#d0e0e9"
+      d="M434 370L470 352L506 370L470 388Z"
+      fill="#bbd1de"
+      fill-opacity=".14"
+      stroke="#d1e0e8"
       stroke-width="1.3"
-      stroke-dasharray="3 3"
+      stroke-dasharray="3 4"
     />
 
-    <!-- Same proposed route on the coordination plane -->
+    <!-- Shared telecom alignment -->
     <path
       class="permit-alignment"
-      d="M180 375L300 435L460 355L580 415L650 380"
+      d="M210 400L310 450L470 370L590 430L650 400"
       fill="none"
-      stroke="#d1e0e8"
+      stroke="#dce7ed"
       stroke-width="2.5"
       stroke-linecap="square"
       stroke-linejoin="miter"
     />
 
-    <!-- Registered access locations -->
-    <g fill="#233f51" stroke="#d1e0e8" stroke-width="1.5">
-      <path d="M292 435L300 431L308 435L300 439Z"/>
-      <path d="M452 355L460 351L468 355L460 359Z"/>
-      <path d="M642 380L650 376L658 380L650 384Z"/>
+    <!-- Registered access points -->
+    <g fill="#345971" stroke="#e0e9ef" stroke-width="1.5">
+      <path d="M302 450L310 446L318 450L310 454Z"/>
+      <path d="M462 370L470 366L478 370L470 374Z"/>
+      <path d="M642 400L650 396L658 400L650 404Z"/>
     </g>
 
-    <!-- Permitting annotation leaders -->
+    <!-- Small spatial-registration marker, not an approval stamp -->
     <g
-      class="permit-annotations"
-      font-family="'DM Sans', Arial, sans-serif"
-      font-size="10"
-      font-weight="500"
-      letter-spacing=".5"
+      class="coordination-resolution"
+      fill="none"
+      stroke="#e0eaf0"
+      stroke-width="1.2"
     >
-      <g fill="none" stroke="#b4cbd9" stroke-width="1">
-        <path d="M235 385L158 347H57"/>
-        <path d="M425 311L471 288H601"/>
-        <path d="M496 355L568 338H733"/>
-      </g>
-
-      <g fill="#d0dce4">
-        <text x="57" y="334">RIGHT-OF-WAY</text>
-        <text x="499" y="277">CROSSING REVIEW</text>
-        <text x="612" y="326">WORK-AREA CONDITIONS</text>
-      </g>
+      <path d="M415 345L427 339L439 345L427 351Z"/>
+      <path d="M427 332V338M427 352V358"/>
     </g>
 
-    <!-- Layer identifier -->
+    <!-- One layer label -->
     <g
       class="layer-identifier"
       font-family="'DM Sans', Arial, sans-serif"
     >
       <path
-        d="M100 372L63 391"
+        d="M40 477H94L135 457"
         fill="none"
         stroke="#a9bfce"
+        stroke-width="1"
         stroke-opacity=".65"
       />
       <text
-        x="38"
-        y="419"
-        fill="#c1d0d9"
-        font-size="10"
-        font-weight="600"
-        letter-spacing="1"
-      >02 / PERMIT</text>
+        x="40"
+        y="466"
+        fill="#d4dfe5"
+        font-size="12"
+        font-weight="500"
+        letter-spacing=".25"
+      >Coordination</text>
     </g>
   </g>
 
   <!-- ================================================================
-       01 / ENGINEERING
-       A composed alignment drawing with purposeful line hierarchy.
+       DESIGN
+       Blueprint-inspired drawing plane with clear line hierarchy.
        ================================================================ -->
   <g class="assembly-design">
 
     <!-- Drawing sheet edge -->
     <path
-      d="M100 230L420 390V397L100 237Z"
-      fill="#a5b3bb"
+      d="M135 230L420 373V380L135 237Z"
+      fill="#66869a"
     />
     <path
-      d="M420 390L720 240V247L420 397Z"
-      fill="#708894"
+      d="M420 373L720 223V230L420 380Z"
+      fill="#294a62"
     />
     <path
       class="engineering-sheet"
-      d="M100 230L400 80L720 240L420 390Z"
-      fill="#edf0ed"
+      d="M135 230L435 80L720 223L420 373Z"
+      fill="#23465e"
     />
 
-    <!-- Fine inset sheet border -->
+    <!-- Inset drawing border -->
     <path
-      d="M118 230L400 89L702 240L420 381Z"
+      d="M151 230L435 88L704 223L420 365Z"
       fill="none"
-      stroke="#aebbbd"
+      stroke="#bed0db"
       stroke-width=".8"
+      stroke-opacity=".6"
     />
 
-    <!-- Parcel context -->
+    <!-- Drafting grid: subtle, subordinate to the actual drawing -->
+    <g
+      class="blueprint-grid"
+      fill="none"
+      stroke="#9cb8ca"
+      stroke-width=".6"
+      stroke-opacity=".17"
+    >
+      <path d="M165 245L465 95"/>
+      <path d="M195 260L495 110"/>
+      <path d="M225 275L525 125"/>
+      <path d="M255 290L555 140"/>
+      <path d="M285 305L585 155"/>
+      <path d="M315 320L615 170"/>
+      <path d="M345 335L645 185"/>
+      <path d="M375 350L675 200"/>
+
+      <path d="M165 215L450 358"/>
+      <path d="M195 200L480 343"/>
+      <path d="M225 185L510 328"/>
+      <path d="M255 170L540 313"/>
+      <path d="M285 155L570 298"/>
+      <path d="M315 140L600 283"/>
+      <path d="M345 125L630 268"/>
+      <path d="M375 110L660 253"/>
+      <path d="M405 95L690 238"/>
+    </g>
+
+    <!-- Parcel boundaries -->
     <g
       class="engineering-parcels"
       fill="none"
-      stroke="#b2bec0"
-      stroke-width="1"
+      stroke="#b4c9d6"
+      stroke-width=".9"
+      stroke-opacity=".7"
     >
-      <path d="M132 230L224 184L276 210L184 256Z"/>
-      <path d="M244 174L336 128L388 154L296 200Z"/>
-      <path d="M444 318L536 272L588 298L496 344Z"/>
-      <path d="M556 262L648 216L689 236L597 282Z"/>
+      <path d="M169 230L249 190L291 211L211 251Z"/>
+      <path d="M267 181L347 141L389 162L309 202Z"/>
+      <path d="M470 308L550 268L592 289L512 329Z"/>
+      <path d="M569 259L649 219L686 237L606 277Z"/>
     </g>
 
-    <!-- Road corridor -->
-    <path
-      d="M215 288L515 138L585 173L285 323Z"
-      fill="#d2dbdc"
-    />
-
-    <!-- Road edges -->
+    <!-- Road corridor: linework rather than a filled surface -->
     <g
       fill="none"
-      stroke="#8c9fa7"
-      stroke-width="1.1"
+      stroke="#d3e0e8"
+      stroke-width="1.2"
     >
-      <path d="M215 288L515 138"/>
-      <path d="M285 323L585 173"/>
+      <path d="M240 282L540 132"/>
+      <path d="M300 312L600 162"/>
     </g>
 
     <!-- Road centerline -->
     <path
-      d="M250 305L550 155"
+      d="M270 297L570 147"
       fill="none"
-      stroke="#8c9fa7"
-      stroke-width="1"
-      stroke-dasharray="11 7"
+      stroke="#b3c9d8"
+      stroke-width=".9"
+      stroke-dasharray="10 7"
+      stroke-opacity=".7"
     />
 
-    <!-- Right-of-way -->
+    <!-- Right-of-way edges -->
     <g
       fill="none"
-      stroke="#7f98a7"
-      stroke-width=".9"
-      stroke-dasharray="6 4"
+      stroke="#94b5cb"
+      stroke-width=".8"
+      stroke-dasharray="5 4"
     >
-      <path d="M188 274L488 124"/>
-      <path d="M312 336L612 186"/>
+      <path d="M225 275L525 125"/>
+      <path d="M315 320L615 170"/>
     </g>
 
-    <!-- Existing utility crossing -->
+    <!-- Existing crossing utility -->
     <path
-      d="M313 163L546 280"
+      d="M342 154L563 265"
       fill="none"
-      stroke="#9ca6a6"
-      stroke-width="1.7"
-      stroke-dasharray="3 4"
+      stroke="#adc0ca"
+      stroke-width="1.2"
+      stroke-dasharray="2 4"
+      stroke-opacity=".8"
     />
 
-    <!-- Offset dimension parallel to the corridor -->
+    <!-- Engineering dimension strings: deliberately no text -->
     <g
       class="engineering-dimensions"
       fill="none"
-      stroke="#647d8c"
-      stroke-width=".85"
+      stroke="#b7cdda"
+      stroke-width=".8"
     >
-      <path d="M188 274L173 266"/>
-      <path d="M215 288L200 280"/>
-      <path d="M178 261L205 275"/>
+      <!-- Main alignment dimension -->
+      <path d="M310 300L321 317"/>
+      <path d="M470 220L481 237"/>
+      <path d="M321 314L481 234"/>
+      <path d="M317 311L325 317"/>
+      <path d="M477 231L485 237"/>
 
-      <!-- Dimension ticks -->
-      <path d="M175 264L181 258"/>
-      <path d="M202 278L208 272"/>
+      <!-- Short offset dimension -->
+      <path d="M226 276L211 268"/>
+      <path d="M240 282L225 274"/>
+      <path d="M213 264L228 272"/>
+      <path d="M210 267L216 261"/>
+      <path d="M225 275L231 269"/>
 
-      <!-- Alignment segment dimension -->
-      <path d="M300 300L311 315"/>
-      <path d="M460 220L471 235"/>
-      <path d="M311 312L471 232"/>
-      <path d="M307 309L315 315"/>
-      <path d="M467 229L475 235"/>
+      <!-- End segment dimension -->
+      <path d="M590 280L599 295"/>
+      <path d="M650 250L659 265"/>
+      <path d="M599 292L659 262"/>
+      <path d="M595 289L603 295"/>
+      <path d="M655 259L663 265"/>
     </g>
 
-    <!-- Dominant proposed telecom route -->
-    <path
-      d="M180 240L300 300L460 220L580 280L650 245"
-      fill="none"
-      stroke="#f9faf7"
-      stroke-width="8"
-      stroke-linejoin="miter"
-    />
+    <!-- Main proposed telecom alignment -->
     <path
       class="design-primary-alignment proposed-telecom-route"
-      d="M180 240L300 300L460 220L580 280L650 245"
+      d="M210 250L310 300L470 220L590 280L650 250"
       fill="none"
-      stroke="#294f69"
-      stroke-width="3.5"
+      stroke="#f4f7f7"
+      stroke-width="3.7"
       stroke-linecap="square"
       stroke-linejoin="miter"
     />
 
-    <!-- Designed access structures -->
+    <!-- Access structures -->
     <g
       class="engineering-access-points"
-      fill="#edf0ed"
-      stroke="#294f69"
-      stroke-width="1.7"
+      fill="#23465e"
+      stroke="#f4f7f7"
+      stroke-width="1.6"
     >
-      <path d="M172 240L180 236L188 240L180 244Z"/>
-      <path d="M290 300L300 295L310 300L300 305Z"/>
-      <path d="M450 220L460 215L470 220L460 225Z"/>
-      <path d="M642 245L650 241L658 245L650 249Z"/>
+      <path d="M202 250L210 246L218 250L210 254Z"/>
+      <path d="M301 300L310 295.5L319 300L310 304.5Z"/>
+      <path d="M461 220L470 215.5L479 220L470 224.5Z"/>
+      <path d="M642 250L650 246L658 250L650 254Z"/>
     </g>
 
-    <!-- Alignment turn marker -->
+    <!-- Vertex -->
     <circle
-      cx="580"
+      cx="590"
       cy="280"
-      r="3"
-      fill="#294f69"
-      stroke="#edf0ed"
-      stroke-width="1"
+      r="2.7"
+      fill="#f4f7f7"
     />
 
-    <!-- Crossing detail locator -->
-    <path
-      d="M394 246L420 233L446 246L420 259Z"
-      fill="none"
-      stroke="#647d8c"
-      stroke-width="1"
-    />
-
-    <!-- Enlarged crossing detail on the drawing -->
-    <g class="engineering-detail">
-      <path
-        d="M485 305L550 272L616 305L551 338Z"
-        fill="#e4eae8"
-        stroke="#8ca0aa"
-        stroke-width=".9"
-      />
-      <path
-        d="M503 310L563 280M522 320L582 290"
-        fill="none"
-        stroke="#98aab1"
-        stroke-width="1"
-      />
-      <path
-        d="M510 292L581 327"
-        fill="none"
-        stroke="#a3acab"
-        stroke-width="1.5"
-        stroke-dasharray="3 3"
-      />
-      <path
-        d="M500 311L532 327L597 294"
-        fill="none"
-        stroke="#294f69"
-        stroke-width="2.2"
-      />
-      <path
-        d="M446 246L480 263L513 290"
-        fill="none"
-        stroke="#7c94a2"
-        stroke-width=".8"
-      />
-    </g>
-
-    <!-- Drawing labels, kept on the sheet -->
+    <!-- Small section detail integrated into the drawing -->
     <g
-      class="engineering-labels"
-      fill="#405d6f"
-      font-family="'DM Sans', Arial, sans-serif"
-      font-size="8"
-      font-weight="500"
-      letter-spacing=".35"
-    >
-      <text
-        x="351"
-        y="307"
-        transform="rotate(-26.565 351 307)"
-      >ALIGNMENT SEGMENT</text>
-
-      <text
-        x="463"
-        y="191"
-        transform="rotate(26.565 463 191)"
-      >ACCESS STRUCTURE</text>
-
-      <text
-        x="497"
-        y="347"
-        transform="rotate(26.565 497 347)"
-      >CROSSING DETAIL</text>
-    </g>
-
-    <!-- Main plan callout -->
-    <g
-      class="engineering-annotation"
-      font-family="'DM Sans', Arial, sans-serif"
-    >
-      <path
-        d="M225 263L151 300H52"
-        fill="none"
-        stroke="#a9bfce"
-        stroke-width="1"
-      />
-      <text
-        x="52"
-        y="320"
-        fill="#c1d0d9"
-        font-size="10"
-        font-weight="500"
-        letter-spacing=".6"
-      >PROPOSED FIBER ALIGNMENT</text>
-    </g>
-
-    <!-- Sheet identification -->
-    <path
-      d="M366 352L420 379L485 347"
+      class="engineering-detail"
       fill="none"
-      stroke="#aab9be"
+      stroke="#c5d7e2"
       stroke-width=".8"
-    />
+    >
+      <path d="M365 152L407 131L449 152L407 173Z"/>
+      <path d="M376 152L407 136L438 152"/>
+      <path d="M386 157V149L407 138L427 148V157"/>
+      <ellipse
+        cx="400" cy="151" rx="3" ry="1.8"
+        transform="rotate(26.5 400 151)"
+      />
+      <ellipse
+        cx="408" cy="155" rx="3" ry="1.8"
+        transform="rotate(26.5 408 155)"
+      />
+      <ellipse
+        cx="416" cy="159" rx="3" ry="1.8"
+        transform="rotate(26.5 416 159)"
+      />
+    </g>
 
-    <!-- Layer identifier -->
+    <!-- Minimal drawing-corner registration marks -->
+    <g
+      fill="none"
+      stroke="#d0e0e9"
+      stroke-width=".9"
+      stroke-opacity=".7"
+    >
+      <path d="M160 230L172 224M160 230L172 236"/>
+      <path d="M435 96L423 102M435 96L447 102"/>
+      <path d="M694 223L682 217M694 223L682 229"/>
+    </g>
+
+    <!-- One layer label -->
     <g
       class="layer-identifier"
       font-family="'DM Sans', Arial, sans-serif"
     >
       <path
-        d="M100 237L63 256"
+        d="M40 294H94L135 274"
         fill="none"
         stroke="#a9bfce"
+        stroke-width="1"
         stroke-opacity=".65"
       />
       <text
-        x="38"
-        y="284"
-        fill="#c1d0d9"
-        font-size="10"
-        font-weight="600"
-        letter-spacing="1"
-      >01 / ENGINEER</text>
+        x="40"
+        y="283"
+        fill="#d4dfe5"
+        font-size="12"
+        font-weight="500"
+        letter-spacing=".25"
+      >Design</text>
     </g>
   </g>
 
