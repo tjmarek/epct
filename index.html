@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>[Company Name] — Design. Permit. Build.</title>
+  <meta
+    name="description"
+    content="An Austin-based team connecting fiber and underground infrastructure design, permitting, and construction."
+  >
+  <meta name="theme-color" content="#111a20">
+
+  <!-- Private prototype: remove this directive only after launch approval. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Company Name — home">
+        <svg
+          class="brand-mark"
+          width="36"
+          height="36"
+          viewBox="0 0 36 36"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 29V15L17 5H31V19L19 29H5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+          />
+          <path
+            d="M5 29L17 19H31M17 19V5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+          />
+          <circle cx="17" cy="19" r="3" fill="currentColor"/>
+        </svg>
+
+        <span class="brand-type">
+          <span class="brand-name">[Company Name]</span>
+          <span class="brand-descriptor">Infrastructure, connected.</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        hidden
+      >
+        <span class="menu-toggle-label">Menu</span>
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <nav
+        class="primary-navigation"
+        id="primary-navigation"
+        aria-label="Main navigation"
+      >
+        <a href="#capabilities">Capabilities</a>
+        <a href="#approach">Approach</a>
+        <a href="#leadership">Leadership</a>
+        <a class="navigation-contact" href="#contact">
+          Discuss a project <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 01 / INTRODUCTION -->
+    <section class="hero section-dark" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid-background" aria-hidden="true"></div>
+
+      <div class="hero-topline container">
+        <p class="eyebrow">
+          <span class="status-dot" aria-hidden="true"></span>
+          Austin, Texas / Built to connect
+        </p>
+        <span class="technical-label hero-index">Design · Permit · Build</span>
+      </div>
+
+      <div class="hero-layout container">
+        <div class="hero-copy">
+          <p class="eyebrow hero-kicker">Fiber & underground infrastructure</p>
+
+          <h1 id="hero-title">
+            From first<br>
+            alignment<span class="accent-text">.</span><br>
+            <span class="hero-title-secondary">To final<br>installation.</span>
+          </h1>
+
+          <p class="hero-description">
+            Design, permitting, and construction.
+            A connected approach to the infrastructure beneath what comes next.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">
+              Discuss a project
+              <span class="button-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="text-link text-link-light" href="#capabilities">
+              Explore our capabilities
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero-visual" aria-labelledby="hero-visual-caption">
+          <div class="visual-topline" aria-hidden="true">
+            <span>Integrated delivery system</span>
+            <span>FIG. 001</span>
+          </div>
+
+          <svg
+            class="route-diagram"
+            viewBox="0 0 760 660"
+            role="img"
+            aria-labelledby="route-title route-description"
+          >
+            <title id="route-title">An engineered route, from planning to installation</title>
+            <desc id="route-description">
+              A conceptual layered infrastructure diagram connects a planned
+              surface route with permitting and underground installation.
+            </desc>
+
+            <defs>
+              <pattern
+                id="route-grid"
+                width="46"
+                height="46"
+                patternUnits="userSpaceOnUse"
+                patternTransform="matrix(1 .48 -1 .48 380 50)"
+              >
+                <path
+                  d="M46 0H0V46"
+                  fill="none"
+                  stroke="#71818a"
+                  stroke-opacity=".23"
+                  stroke-width="1"
+                />
+              </pattern>
+
+              <linearGradient id="surface-fill" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#263740" stop-opacity=".9"/>
+                <stop offset="1" stop-color="#17252d" stop-opacity=".35"/>
+              </linearGradient>
+
+              <linearGradient id="earth-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#34434b" stop-opacity=".55"/>
+                <stop offset="1" stop-color="#17252d" stop-opacity=".08"/>
+              </linearGradient>
+
+              <filter id="signal-glow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="4"/>
+              </filter>
+            </defs>
+
+            <g class="diagram-base">
+              <path
+                d="M85 405L375 260L690 410L400 558Z"
+                fill="none"
+                stroke="#6e818b"
+                stroke-opacity=".25"
+                stroke-dasharray="4 7"
+              />
+              <path
+                d="M85 325L375 180L690 330L400 478Z"
+                fill="url(#earth-fill)"
+                stroke="#6e818b"
+                stroke-opacity=".4"
+              />
+              <path
+                d="M85 215L375 70L690 220L400 368Z"
+                fill="url(#surface-fill)"
+                stroke="#8b9ba4"
+                stroke-opacity=".65"
+              />
+              <path
+                d="M85 215L375 70L690 220L400 368Z"
+                fill="url(#route-grid)"
+              />
+
+              <g
+                fill="none"
+                stroke="#71818a"
+                stroke-opacity=".4"
+                stroke-dasharray="3 7"
+              >
+                <path d="M85 215V405"/>
+                <path d="M375 70V260"/>
+                <path d="M690 220V410"/>
+                <path d="M400 368V558"/>
+              </g>
+
+              <g fill="none" stroke="#8b9ba4" stroke-opacity=".32">
+                <path d="M156 205L291 137L355 167L220 235Z"/>
+                <path d="M431 167L510 128L611 176L532 216Z"/>
+                <path d="M195 269L264 235L322 263L253 298Z"/>
+                <path d="M460 281L537 242L598 271L521 310Z"/>
+                <path d="M354 90L354 126L417 157"/>
+                <path d="M114 230L180 198"/>
+                <path d="M578 288L650 254"/>
+              </g>
+
+              <g fill="none" stroke="#71818a" stroke-opacity=".5">
+                <path d="M225 338V415L371 487"/>
+                <path d="M502 323V400L455 424"/>
+                <path d="M313 260V342"/>
+              </g>
+            </g>
+
+            <g class="diagram-route">
+              <path
+                class="route-shadow"
+                d="M167 255L295 191L395 239L484 194L578 239"
+                fill="none"
+                stroke="#c7e66b"
+                stroke-opacity=".12"
+                stroke-width="15"
+              />
+              <path
+                class="route-path route-path-surface"
+                d="M167 255L295 191L395 239L484 194L578 239"
+                pathLength="1"
+                fill="none"
+                stroke="#c7e66b"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                class="route-path route-path-drop"
+                d="M395 239V349L472 386"
+                pathLength="1"
+                fill="none"
+                stroke="#c7e66b"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                class="route-path route-path-underground"
+                d="M216 377L332 435L472 365L582 418"
+                pathLength="1"
+                fill="none"
+                stroke="#c7e66b"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M216 388L332 446L472 376L582 429"
+                fill="none"
+                stroke="#81939d"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+
+              <g class="route-node" fill="#111a20" stroke="#c7e66b" stroke-width="2">
+                <circle cx="167" cy="255" r="6"/>
+                <circle cx="395" cy="239" r="7"/>
+                <circle cx="578" cy="239" r="6"/>
+                <circle cx="582" cy="418" r="6"/>
+              </g>
+
+              <circle
+                class="route-signal-glow"
+                cx="167"
+                cy="255"
+                r="9"
+                fill="#c7e66b"
+                filter="url(#signal-glow)"
+                opacity="0"
+              />
+              <circle
+                class="route-signal"
+                cx="167"
+                cy="255"
+                r="4"
+                fill="#f0ffd1"
+                opacity="0"
+              />
+            </g>
+
+            <g class="diagram-annotations">
+              <g fill="none" stroke="#8b9ba4" stroke-opacity=".65">
+                <path d="M167 255L111 282H55"/>
+                <path d="M578 239L634 180H710"/>
+                <path d="M582 418L633 460H710"/>
+              </g>
+
+              <g
+                fill="#a7b4bb"
+                font-family="ui-monospace, monospace"
+                font-size="11"
+                letter-spacing="1.2"
+              >
+                <text x="55" y="303">01 / DESIGN</text>
+                <text x="622" y="167">02 / PERMIT</text>
+                <text x="621" y="482">03 / BUILD</text>
+              </g>
+
+              <g fill="#71818a" font-family="ui-monospace, monospace" font-size="10">
+                <text x="341" y="588">CONCEPTUAL SECTION / NOT TO SCALE</text>
+              </g>
+            </g>
+          </svg>
+
+          <figcaption class="visual-caption" id="hero-visual-caption">
+            <span class="caption-marker" aria-hidden="true">+</span>
+            One connected path. Above and below the surface.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="hero-bottom container">
+        <p>Planning intelligence. Field perspective.</p>
+        <a class="scroll-cue" href="#capabilities">
+          <span>Follow the route</span>
+          <span class="scroll-cue-line" aria-hidden="true"></span>
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 02 / CAPABILITIES -->
+    <section
+      class="capabilities section-light section-padding"
+      id="capabilities"
+      aria-labelledby="capabilities-title"
+    >
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow section-label">
+            <span class="section-number">01 /</span>
+            Connected capabilities
+          </p>
+
+          <div class="section-heading-main">
+            <h2 id="capabilities-title">
+              Three disciplines.<br>
+              <span class="muted-text">One coordinated path.</span>
+            </h2>
+            <p class="section-intro">
+              A project does not end at the edge of a drawing.
+              Our approach connects the decisions made in planning
+              with the approvals and fieldwork that follow.
+            </p>
+          </div>
+        </div>
+
+        <div class="capability-list">
+          <article class="capability-item" data-reveal>
+            <div class="capability-number" aria-hidden="true">01</div>
+
+            <div class="capability-content">
+              <p class="technical-label">Define the route</p>
+              <h3>Design & engineering</h3>
+              <p>
+                Build the plan with the next steps in view.
+                A practical approach to fiber and underground infrastructure
+                design, informed by permitting needs and field conditions.
+              </p>
+              <ul class="capability-tags" aria-label="Proposed design scope">
+                <li>Route planning</li>
+                <li>Design coordination</li>
+                <li>Constructability</li>
+              </ul>
+            </div>
+
+            <svg class="capability-symbol" viewBox="0 0 160 120" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.3">
+                <path d="M20 85L77 24L140 55L83 108Z" opacity=".3"/>
+                <path d="M20 57L77 8L140 39L83 88Z"/>
+                <path d="M20 57V85M83 88V108M140 39V55" opacity=".4"/>
+                <path d="M43 53L77 27L113 44L80 70Z"/>
+              </g>
+              <circle cx="77" cy="27" r="4" fill="currentColor"/>
+            </svg>
+          </article>
+
+          <article class="capability-item" data-reveal>
+            <div class="capability-number" aria-hidden="true">02</div>
+
+            <div class="capability-content">
+              <p class="technical-label">Navigate the requirements</p>
+              <h3>Permitting & coordination</h3>
+              <p>
+                Keep approvals connected to the larger delivery plan.
+                Bring documentation, agency coordination, and project
+                communication into a deliberate permitting process.
+              </p>
+              <ul class="capability-tags" aria-label="Proposed permitting scope">
+                <li>Permit preparation</li>
+                <li>Agency coordination</li>
+                <li>Approval tracking</li>
+              </ul>
+            </div>
+
+            <svg class="capability-symbol" viewBox="0 0 160 120" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.3">
+                <path d="M40 16H103L127 40V105H40Z"/>
+                <path d="M103 16V40H127"/>
+                <path d="M55 42H86M55 54H106M55 66H92" opacity=".45"/>
+                <circle cx="100" cy="87" r="19"/>
+                <path d="M91 87L97 93L109 80"/>
+                <path d="M29 28H20V114H93V110" opacity=".3"/>
+              </g>
+            </svg>
+          </article>
+
+          <article class="capability-item" data-reveal>
+            <div class="capability-number" aria-hidden="true">03</div>
+
+            <div class="capability-content">
+              <p class="technical-label">Bring the plan to ground</p>
+              <h3>Construction & installation</h3>
+              <p>
+                Translate the approved scope into coordinated field execution.
+                Keep installation connected to the design intent,
+                site requirements, and the work needed for closeout.
+              </p>
+              <ul class="capability-tags" aria-label="Proposed construction scope">
+                <li>Underground installation</li>
+                <li>Field coordination</li>
+                <li>Closeout documentation</li>
+              </ul>
+            </div>
+
+            <svg class="capability-symbol" viewBox="0 0 160 120" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.3">
+                <path d="M14 34H146"/>
+                <path d="M27 34V100H133V34" opacity=".35"/>
+                <path d="M45 34V80H115V34"/>
+                <path d="M14 47L27 60M14 68L27 81M133 60L146 47M133 81L146 68" opacity=".35"/>
+                <ellipse cx="80" cy="72" rx="22" ry="9"/>
+                <path d="M58 72V88C58 100 102 100 102 88V72"/>
+                <path d="M68 72C68 77 92 77 92 72C92 67 68 67 68 72Z"/>
+              </g>
+            </svg>
+          </article>
+        </div>
+
+        <div class="section-footnote">
+          <span class="footnote-cross" aria-hidden="true">+</span>
+          <p>
+            Built around the full project—not just the next handoff.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 / BELOW THE SURFACE -->
+    <section
+      class="below-surface section-dark section-padding"
+      aria-labelledby="surface-title"
+    >
+      <div class="container">
+        <div class="surface-heading" data-reveal>
+          <p class="eyebrow section-label">
+            <span class="section-number">02 /</span>
+            The larger picture
+          </p>
+          <h2 id="surface-title">
+            What happens below<br>
+            <span class="accent-text">moves everything above.</span>
+          </h2>
+        </div>
+
+        <div class="surface-layout">
+          <figure class="section-illustration" data-reveal>
+            <div class="visual-topline" aria-hidden="true">
+              <span>Infrastructure / section study</span>
+              <span>FIG. 002</span>
+            </div>
+
+            <svg
+              class="cross-section"
+              viewBox="0 0 900 530"
+              role="img"
+              aria-labelledby="section-svg-title section-svg-description"
+            >
+              <title id="section-svg-title">Conceptual underground infrastructure section</title>
+              <desc id="section-svg-description">
+                A road and simplified buildings sit above layered ground,
+                conduit routes, and underground fiber infrastructure.
+              </desc>
+
+              <defs>
+                <pattern
+                  id="soil-hatch"
+                  width="16"
+                  height="16"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M-4 4L4-4M0 16L16 0M12 20L20 12"
+                    fill="none"
+                    stroke="#71818a"
+                    stroke-opacity=".12"
+                  />
+                </pattern>
+                <linearGradient id="soil-fade" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#34434b" stop-opacity=".55"/>
+                  <stop offset="1" stop-color="#111a20" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <path d="M45 240H855V465H45Z" fill="url(#soil-fade)"/>
+              <path d="M45 240H855V465H45Z" fill="url(#soil-hatch)"/>
+
+              <g fill="none" stroke="#84959f" stroke-width="1.5">
+                <path d="M45 240H855"/>
+                <path d="M80 240V151H175V240"/>
+                <path d="M92 151V136H163V151"/>
+                <path d="M108 171H145M108 190H145M108 209H145" opacity=".5"/>
+                <path d="M663 240V111H798V240"/>
+                <path d="M680 111V91H780V111"/>
+                <path d="M684 136H778M684 160H778M684 184H778M684 208H778" opacity=".4"/>
+                <path d="M222 233H599M222 242H599"/>
+                <path d="M246 221H286M322 221H362M398 221H438M474 221H514M550 221H590" opacity=".6"/>
+                <path d="M196 240V188M187 188H205"/>
+                <path d="M625 240V175M616 175H634"/>
+              </g>
+
+              <g fill="none" stroke="#71818a" stroke-width="1">
+                <path d="M45 305H855" stroke-dasharray="4 9" opacity=".35"/>
+                <path d="M45 406H855" stroke-dasharray="4 9" opacity=".25"/>
+                <path d="M112 240V344H718V240" opacity=".5"/>
+                <path d="M128 240V359H734V240" opacity=".3"/>
+              </g>
+
+              <g class="section-conduit" fill="none" stroke-linejoin="round">
+                <path
+                  d="M85 385H260V327H579V385H813"
+                  stroke="#c7e66b"
+                  stroke-opacity=".09"
+                  stroke-width="24"
+                />
+                <path
+                  d="M85 385H260V327H579V385H813"
+                  stroke="#c7e66b"
+                  stroke-width="5"
+                />
+                <path
+                  d="M85 399H274V341H565V399H813"
+                  stroke="#8b9ba4"
+                  stroke-width="3"
+                />
+              </g>
+
+              <g fill="#111a20" stroke="#c7e66b" stroke-width="2">
+                <circle cx="260" cy="327" r="7"/>
+                <circle cx="579" cy="327" r="7"/>
+                <circle cx="813" cy="385" r="7"/>
+              </g>
+
+              <g fill="none" stroke="#8b9ba4" stroke-opacity=".65">
+                <path d="M420 327V285H489"/>
+                <path d="M734 359L775 302H836"/>
+                <path d="M260 399V454H333"/>
+              </g>
+
+              <g
+                fill="#a7b4bb"
+                font-family="ui-monospace, monospace"
+                font-size="10"
+                letter-spacing="1"
+              >
+                <text x="439" y="274">PLANNED ALIGNMENT</text>
+                <text x="737" y="289">UTILITY INTERFACE</text>
+                <text x="277" y="474">CONNECTED INSTALLATION</text>
+                <text x="46" y="511" fill="#71818a">ILLUSTRATIVE ONLY / NOT AN ENGINEERING DETAIL</text>
+              </g>
+            </svg>
+
+            <figcaption class="visual-caption">
+              Infrastructure is a system. The delivery should be, too.
+            </figcaption>
+          </figure>
+
+          <div class="surface-copy" data-reveal>
+            <p class="large-copy">
+              The most important connections are not always visible.
+            </p>
+            <p>
+              Between a route and a right-of-way. Between a drawing and
+              a field condition. Between an approval and the work that follows.
+            </p>
+            <p>
+              We are building a company around those connections—with
+              design, permitting, and construction considered together.
+            </p>
+            <a class="text-link text-link-light" href="#approach">
+              See the delivery approach
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 / APPROACH -->
+    <section
+      class="approach section-light section-padding"
+      id="approach"
+      aria-labelledby="approach-title"
+    >
+      <div class="container approach-layout">
+        <div class="approach-introduction" data-reveal>
+          <p class="eyebrow section-label">
+            <span class="section-number">03 /</span>
+            How the work connects
+          </p>
+          <h2 id="approach-title">
+            Think ahead.<br>
+            <span class="muted-text">Build accordingly.</span>
+          </h2>
+          <p class="section-intro">
+            A delivery approach organized around the whole project,
+            with a clear purpose at every stage.
+          </p>
+
+          <div class="process-indicator" aria-hidden="true">
+            <span class="process-indicator-label">Project progression</span>
+            <div class="process-indicator-track">
+              <span class="process-indicator-fill"></span>
+            </div>
+            <span class="process-indicator-count">01 — 05</span>
+          </div>
+        </div>
+
+        <ol class="process-list">
+          <li class="process-step" data-step="1" data-reveal>
+            <span class="process-step-number">01</span>
+            <div>
+              <p class="technical-label">Establish</p>
+              <h3>Define the scope.</h3>
+              <p>
+                Understand the project objectives, delivery requirements,
+                responsibilities, and known constraints.
+              </p>
+            </div>
+          </li>
+
+          <li class="process-step" data-step="2" data-reveal>
+            <span class="process-step-number">02</span>
+            <div>
+              <p class="technical-label">Develop</p>
+              <h3>Connect route and design.</h3>
+              <p>
+                Develop the planned alignment with attention to
+                approvals, utility interfaces, and construction considerations.
+              </p>
+            </div>
+          </li>
+
+          <li class="process-step" data-step="3" data-reveal>
+            <span class="process-step-number">03</span>
+            <div>
+              <p class="technical-label">Coordinate</p>
+              <h3>Navigate the approvals.</h3>
+              <p>
+                Organize permitting requirements and maintain communication
+                as submissions, comments, and approvals progress.
+              </p>
+            </div>
+          </li>
+
+          <li class="process-step" data-step="4" data-reveal>
+            <span class="process-step-number">04</span>
+            <div>
+              <p class="technical-label">Execute</p>
+              <h3>Bring the plan into the field.</h3>
+              <p>
+                Coordinate installation around the approved scope,
+                site conditions, and the requirements of the work.
+              </p>
+            </div>
+          </li>
+
+          <li class="process-step" data-step="5" data-reveal>
+            <span class="process-step-number">05</span>
+            <div>
+              <p class="technical-label">Complete</p>
+              <h3>Close the loop.</h3>
+              <p>
+                Bring field information and required documentation
+                together for an organized project closeout.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 05 / LEADERSHIP -->
+    <section
+      class="leadership section-dark section-padding"
+      id="leadership"
+      aria-labelledby="leadership-title"
+    >
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow section-label">
+            <span class="section-number">04 /</span>
+            The people behind the work
+          </p>
+          <div class="section-heading-main">
+            <h2 id="leadership-title">
+              A new company.<br>
+              <span class="muted-text">An experienced foundation.</span>
+            </h2>
+            <p class="section-intro">
+              Built by industry professionals bringing their individual
+              experience together around a connected delivery model.
+            </p>
+          </div>
+        </div>
+
+        <!-- Replace placeholders with approved names, roles, and biographies. -->
+        <div class="leadership-list">
+          <article class="leader-profile" data-reveal>
+            <div class="leader-monogram" aria-hidden="true">
+              <span>01</span>
+              <span class="monogram-cross">+</span>
+            </div>
+            <div class="leader-details">
+              <p class="technical-label">Leadership / Design</p>
+              <h3>[Leader name]</h3>
+              <p class="leader-role">[Approved title]</p>
+              <p class="leader-bio">
+                [Add an approved biography describing this leader’s individual
+                experience, relevant responsibilities, and verified credentials.]
+              </p>
+            </div>
+          </article>
+
+          <article class="leader-profile" data-reveal>
+            <div class="leader-monogram" aria-hidden="true">
+              <span>02</span>
+              <span class="monogram-cross">+</span>
+            </div>
+            <div class="leader-details">
+              <p class="technical-label">Leadership / Permitting</p>
+              <h3>[Leader name]</h3>
+              <p class="leader-role">[Approved title]</p>
+              <p class="leader-bio">
+                [Add an approved biography describing this leader’s individual
+                experience, coordination background, and relevant project roles.]
+              </p>
+            </div>
+          </article>
+
+          <article class="leader-profile" data-reveal>
+            <div class="leader-monogram" aria-hidden="true">
+              <span>03</span>
+              <span class="monogram-cross">+</span>
+            </div>
+            <div class="leader-details">
+              <p class="technical-label">Leadership / Construction</p>
+              <h3>[Leader name]</h3>
+              <p class="leader-role">[Approved title]</p>
+              <p class="leader-bio">
+                [Add an approved biography describing this leader’s individual
+                field experience, operational responsibilities, and expertise.]
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 / LOCATION -->
+    <section
+      class="footprint section-light section-padding"
+      aria-labelledby="footprint-title"
+    >
+      <div class="container footprint-layout">
+        <div class="footprint-copy" data-reveal>
+          <p class="eyebrow section-label">
+            <span class="section-number">05 /</span>
+            Our starting point
+          </p>
+          <h2 id="footprint-title">
+            Rooted in Austin.<br>
+            <span class="muted-text">Looking ahead.</span>
+          </h2>
+          <p class="section-intro">
+            An Austin-based company focused on the infrastructure
+            connecting communities, networks, and what comes next.
+          </p>
+
+          <dl class="location-details">
+            <div>
+              <dt>Home base</dt>
+              <dd>Austin, Texas</dd>
+            </div>
+            <div>
+              <dt>Project coverage</dt>
+              <dd>Contact us to discuss your location and scope.</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="texas-figure" data-reveal>
+          <svg
+            class="texas-map"
+            viewBox="0 0 600 570"
+            role="img"
+            aria-labelledby="texas-map-title texas-map-description"
+          >
+            <title id="texas-map-title">Austin, Texas</title>
+            <desc id="texas-map-description">
+              A stylized outline of Texas marks the approximate location of Austin.
+              No project locations or service boundaries are shown.
+            </desc>
+
+            <defs>
+              <pattern
+                id="texas-grid"
+                width="25"
+                height="25"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M25 0H0V25"
+                  fill="none"
+                  stroke="#697a84"
+                  stroke-opacity=".15"
+                />
+              </pattern>
+            </defs>
+
+            <path
+              class="texas-outline"
+              d="M203 43H337V173L371 188L392 179L416 194L448 190
+                 L468 211L481 253L474 290L488 315L462 337L447 367
+                 L419 388L403 414L370 428L348 453L338 499L313 512
+                 L294 486L276 447L253 429L236 399L213 379L190 368
+                 L170 340L149 321L128 330L106 316L88 282L57 254
+                 L37 218H203Z"
+              fill="url(#texas-grid)"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            />
+
+            <g class="austin-marker">
+              <circle class="austin-ring" cx="348" cy="355" r="30"
+                fill="none" stroke="currentColor" stroke-opacity=".15"/>
+              <circle cx="348" cy="355" r="17"
+                fill="none" stroke="currentColor" stroke-opacity=".3"/>
+              <circle cx="348" cy="355" r="5" fill="currentColor"/>
+              <path d="M360 355H437" fill="none" stroke="currentColor"/>
+              <text
+                x="448"
+                y="359"
+                fill="currentColor"
+                font-family="ui-monospace, monospace"
+                font-size="13"
+                letter-spacing="2"
+              >AUSTIN</text>
+            </g>
+
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-opacity=".25"
+              stroke-width="1"
+            >
+              <path d="M19 43H41M30 32V54"/>
+              <path d="M510 499H532M521 488V510"/>
+            </g>
+          </svg>
+
+          <figcaption class="technical-label">
+            Headquarters location / Stylized map
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 07 / CONTACT -->
+    <section
+      class="contact section-dark section-padding"
+      id="contact"
+      aria-labelledby="contact-title"
+    >
+      <div class="container">
+        <div class="contact-topline">
+          <p class="eyebrow section-label">
+            <span class="section-number">06 /</span>
+            The next connection
+          </p>
+          <span class="contact-symbol" aria-hidden="true">↗</span>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-copy" data-reveal>
+            <h2 id="contact-title">
+              Let’s talk about<br>
+              <span class="accent-text">what comes next.</span>
+            </h2>
+            <p>
+              Tell us where the project is headed.
+              We can start with the location, the scope,
+              and the work you need to move forward.
+            </p>
+
+            <div class="contact-direct">
+              <p class="technical-label">Direct contact</p>
+              <p>[Business email]</p>
+              <p>[Business phone]</p>
+            </div>
+          </div>
+
+          <div class="contact-form-panel" data-reveal>
+            <!--
+              Prototype only. Keep this form disabled until a real submission
+              endpoint, privacy notice, and delivery flow are configured.
+              Do not simulate a successful submission.
+            -->
+            <p class="form-notice" id="form-notice">
+              Preview form — project inquiries are not yet enabled.
+            </p>
+
+            <form
+              class="project-form"
+              id="project-form"
+              aria-describedby="form-notice"
+            >
+              <fieldset disabled>
+                <legend class="visually-hidden">Project inquiry details</legend>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="contact-name">Your name <span>(required)</span></label>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      autocomplete="name"
+                      placeholder="Full name"
+                      required
+                    >
+                  </div>
+
+                  <div class="form-field">
+                    <label for="contact-company">Company</label>
+                    <input
+                      id="contact-company"
+                      name="company"
+                      type="text"
+                      autocomplete="organization"
+                      placeholder="Company name"
+                    >
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label for="contact-email">Email <span>(required)</span></label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="you@company.com"
+                    required
+                  >
+                </div>
+
+                <div class="form-field">
+                  <label for="project-location">Project location</label>
+                  <input
+                    id="project-location"
+                    name="location"
+                    type="text"
+                    placeholder="City, region, or project corridor"
+                  >
+                </div>
+
+                <div class="form-field">
+                  <label for="project-scope">What are you planning?</label>
+                  <textarea
+                    id="project-scope"
+                    name="scope"
+                    rows="3"
+                    placeholder="A brief overview of the scope and timing."
+                  ></textarea>
+                </div>
+
+                <button class="button button-primary form-submit" type="submit">
+                  Start the conversation
+                  <span class="button-arrow" aria-hidden="true">↗</span>
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-dark">
+    <div class="container">
+      <div class="footer-main">
+        <a class="brand footer-brand" href="#top" aria-label="Company Name — back to top">
+          <svg
+            class="brand-mark"
+            width="36"
+            height="36"
+            viewBox="0 0 36 36"
+            aria-hidden="true"
+          >
+            <path
+              d="M5 29V15L17 5H31V19L19 29H5Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <path
+              d="M5 29L17 19H31M17 19V5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <circle cx="17" cy="19" r="3" fill="currentColor"/>
+          </svg>
+          <span class="brand-type">
+            <span class="brand-name">[Company Name]</span>
+            <span class="brand-descriptor">Infrastructure, connected.</span>
+          </span>
+        </a>
+
+        <p class="footer-statement">
+          Design with perspective.<br>
+          Build with purpose.
+        </p>
+
+        <a class="back-to-top text-link text-link-light" href="#top">
+          Back to top <span aria-hidden="true">↑</span>
+        </a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="copyright-year">2026</span> [Company Name]</p>
+        <p>Austin, Texas</p>
+        <p class="prototype-label">Private brand & website prototype</p>
+      </div>
+
+      <p class="prototype-disclaimer">
+        Draft concept for review. Service descriptions, leadership details,
+        credentials, and operating coverage require company approval before
+        publication. Illustrations are conceptual and do not depict completed work.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
