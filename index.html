@@ -91,683 +91,635 @@
       </linearGradient>
 
 <!--
-  Conceptual telecom delivery study.
-  Illustrative only. Not to scale.
+  ROAD + TELECOM CROSSING
 
-  A shared straight alignment connects:
-  Design          — blueprint drawing
-  Coordination    — crossing and working envelope
-  Installation    — trench, conduits, and access chamber
+  All layers share the same projected site coordinates:
+  Road:       x 0–300, y 75–145
+  Telecom:    alongside road at y 175, then crossing at x 190
+  Work area:  an L-shaped corridor around that alignment
 
-  External labels remain stationary during layer animation.
+  Projection:
+  matrix(1 .5 -1 .5 410 90)
+
+  Layer offsets:
+  Design          0
+  Coordination  155
+  Installation  310
+
+  Conceptual illustration only. Not to scale.
 -->
 <symbol id="infrastructure-assembly" viewBox="0 0 820 800">
 
   <!-- ================================================================
-       SHARED REGISTRATION
+       SUBTLE REGISTRATION
+       Align the road crossing between all three representations.
        ================================================================ -->
   <g
     class="assembly-reference"
     fill="none"
     stroke="#a9bfce"
     stroke-width="1"
+    stroke-dasharray="3 8"
   >
-    <!-- Access location -->
-    <path
-      d="M460 200V530"
-      stroke-dasharray="3 8"
-      opacity=".27"
-    />
-
-    <!-- Crossing location -->
-    <path
-      d="M410 225V555"
-      stroke-dasharray="3 8"
-      opacity=".2"
-    />
-
-    <!-- Quiet ground reference -->
-    <path
-      d="M139 602L440 752L744 600"
-      opacity=".13"
-    />
+    <path d="M455 257.5V597.5" opacity=".2"/>
+    <path d="M525 222.5V562.5" opacity=".2"/>
   </g>
 
   <!-- ================================================================
        INSTALLATION
-       A ground volume with an open, partially cut-away trench.
+       Same road, same roadside run, same crossing.
        ================================================================ -->
   <g class="assembly-foundation">
+    <g transform="translate(0 310)">
 
-    <!-- Ground mass -->
-    <path
-      d="M150 530L440 675V722L150 577Z"
-      fill="#435b67"
-    />
-    <path
-      d="M440 675L740 525V572L440 722Z"
-      fill="#263e4b"
-    />
-    <path
-      d="M150 530L450 380L740 525L440 675Z"
-      fill="#6b828d"
-    />
-
-    <!-- Restrained soil strata -->
-    <g
-      fill="none"
-      stroke="#b7c4ca"
-      stroke-width="1"
-      stroke-opacity=".18"
-    >
-      <path d="M150 546L440 691L740 541"/>
-      <path d="M150 562L440 707L740 557"/>
-    </g>
-
-    <!-- Excavation opening -->
-    <path
-      class="trench-opening"
-      d="M262 581L542 441L578 459L298 599Z"
-      fill="#1b303b"
-    />
-
-    <!-- Recessed trench floor -->
-    <path
-      class="trench-floor"
-      d="M262 613L542 473L578 491L298 631Z"
-      fill="#52656b"
-    />
-
-    <!-- Far side wall -->
-    <path
-      class="trench-far-wall"
-      d="M262 581L542 441V473L262 613Z"
-      fill="#3a525f"
-    />
-
-    <!-- End excavation face -->
-    <path
-      d="M542 441L578 459V491L542 473Z"
-      fill="#2d4552"
-    />
-
-    <!-- Bedding strip beneath the conduit bundle -->
-    <path
-      d="M272 616L552 476L568 484L288 624Z"
-      fill="#9caaac"
-      fill-opacity=".68"
-    />
-
-    <!-- Trench lip: only the actual opening edges -->
-    <g
-      fill="none"
-      stroke="#b8c5cb"
-      stroke-width="1.1"
-      stroke-opacity=".6"
-    >
-      <path d="M262 581L542 441L578 459"/>
-      <path d="M262 581L298 599"/>
-    </g>
-
-    <!-- Near wall retained at both ends; middle removed for visibility -->
-    <path
-      d="M298 599L348 574V606L298 631Z"
-      fill="#29424f"
-    />
-    <path
-      d="M528 484L578 459V491L528 516Z"
-      fill="#29424f"
-    />
-
-    <!-- Cut faces explicitly show the removed middle section -->
-    <path
-      d="M348 574L354 577V609L348 606Z"
-      fill="#8c9fa7"
-    />
-    <path
-      d="M522 481L528 484V516L522 513Z"
-      fill="#8c9fa7"
-    />
-
-    <!-- Small wall-edge highlights -->
-    <g
-      fill="none"
-      stroke="#c0ccd1"
-      stroke-opacity=".5"
-      stroke-width="1"
-    >
-      <path d="M298 599L348 574"/>
-      <path d="M528 484L578 459"/>
-    </g>
-
-    <!-- Conduit shadows on the trench floor -->
-    <g
-      fill="none"
-      stroke="#243b47"
-      stroke-linecap="round"
-      stroke-width="18"
-      stroke-opacity=".65"
-    >
-      <path d="M280 623L440 543"/>
-      <path d="M480 523L560 483"/>
-    </g>
-
-    <!-- Rear conduit -->
-    <g
-      fill="none"
-      stroke="#a5bac6"
-      stroke-width="5.5"
-      stroke-linecap="round"
-    >
-      <path d="M280 614L440 534"/>
-      <path d="M480 514L560 474"/>
-    </g>
-
-    <!-- Middle conduit -->
-    <g
-      class="installed-conduit"
-      fill="none"
-      stroke="#d5e0e5"
-      stroke-width="6.5"
-      stroke-linecap="round"
-    >
-      <path d="M280 620L440 540"/>
-      <path d="M480 520L560 480"/>
-    </g>
-
-    <!-- Front conduit -->
-    <g
-      fill="none"
-      stroke="#7e9eb3"
-      stroke-width="5.5"
-      stroke-linecap="round"
-    >
-      <path d="M280 626L440 546"/>
-      <path d="M480 526L560 486"/>
-    </g>
-
-    <!-- Access chamber -->
-    <g class="installed-access">
-
-      <!-- Dark interior -->
+      <!-- Ground volume / front faces -->
       <path
-        d="M430 505L460 490L490 505L460 520Z"
-        fill="#152b37"
-      />
-
-      <!-- Near faces -->
-      <path
-        d="M430 505L460 520V560L430 545Z"
-        fill="#acbdc6"
+        d="M170 210L470 360V410L170 260Z"
+        fill="#425c69"
       />
       <path
-        d="M460 520L490 505V545L460 560Z"
-        fill="#6b8799"
+        d="M470 360L710 240V290L470 410Z"
+        fill="#263f4d"
       />
 
-      <!-- Open rim -->
-      <path
-        d="M426 503L460 486L494 503L460 520Z
-           M437 503L460 491.5L483 503L460 514.5Z"
-        fill="#dce5e8"
-        fill-rule="evenodd"
-      />
-
-      <!-- Interior far walls -->
-      <path
-        d="M437 503L460 491.5L483 503V511
-           L460 499.5L437 511Z"
-        fill="#405c6d"
-      />
-
-      <!-- Interior floor -->
-      <path
-        d="M437 511L460 499.5L483 511L460 522.5Z"
-        fill="#203b4c"
-      />
-
-      <!-- Left entry ports -->
-      <g fill="#1c3747" stroke="#dce5e8" stroke-width=".7">
-        <ellipse
-          cx="440" cy="534" rx="3.6" ry="4.3"
-          transform="rotate(-25 440 534)"
+      <!-- Ground surface -->
+      <g transform="matrix(1 .5 -1 .5 410 90)">
+        <path
+          d="M0 0H300V240H0Z"
+          fill="#70858d"
         />
-        <ellipse
-          cx="440" cy="540" rx="3.6" ry="4.3"
-          transform="rotate(-25 440 540)"
+
+        <!-- Subtle roadside shoulders -->
+        <path d="M0 60H300V75H0Z" fill="#829297"/>
+        <path d="M0 145H300V160H0Z" fill="#829297"/>
+
+        <!-- Road surface interrupted by the open crossing excavation -->
+        <path
+          d="M0 75H178V145H0Z"
+          fill="#3e505a"
         />
-        <ellipse
-          cx="440" cy="546" rx="3.6" ry="4.3"
-          transform="rotate(-25 440 546)"
+        <path
+          d="M202 75H300V145H202Z"
+          fill="#3e505a"
+        />
+
+        <!-- Road edge markings -->
+        <g
+          fill="none"
+          stroke="#d7dedd"
+          stroke-width="1.4"
+          stroke-opacity=".85"
+        >
+          <path d="M0 80H178M202 80H300"/>
+          <path d="M0 140H178M202 140H300"/>
+        </g>
+
+        <!-- Road centerline -->
+        <g
+          fill="none"
+          stroke="#cbd4d7"
+          stroke-width="1.5"
+          stroke-dasharray="14 11"
+          stroke-opacity=".8"
+        >
+          <path d="M0 110H174"/>
+          <path d="M206 110H300"/>
+        </g>
+
+        <!-- Open trench footprint -->
+        <path
+          class="trench-opening"
+          d="M35 163H178V40H202V187H35Z"
+          fill="#172e3b"
         />
       </g>
 
-      <!-- Right entry ports -->
-      <g fill="#193446" stroke="#a8c0ce" stroke-width=".7">
-        <ellipse
-          cx="480" cy="514" rx="3.6" ry="4.3"
-          transform="rotate(25 480 514)"
-        />
-        <ellipse
-          cx="480" cy="520" rx="3.6" ry="4.3"
-          transform="rotate(25 480 520)"
-        />
-        <ellipse
-          cx="480" cy="526" rx="3.6" ry="4.3"
-          transform="rotate(25 480 526)"
-        />
+      <!-- Recessed floor, projected 30 screen units below the surface -->
+      <g transform="translate(0 30)">
+        <g transform="matrix(1 .5 -1 .5 410 90)">
+          <path
+            class="trench-floor"
+            d="M35 163H178V40H202V187H35Z"
+            fill="#6e7b7d"
+          />
+        </g>
       </g>
 
-      <!-- Conduit collars visibly terminate at the ports -->
+      <!--
+        Excavation walls:
+        adding 30 to local x and y projects vertically down by 30.
+      -->
+      <g transform="matrix(1 .5 -1 .5 410 90)">
+
+        <!-- Far wall of roadside trench -->
+        <path
+          d="M35 163H178L208 193H65Z"
+          fill="#435b67"
+        />
+
+        <!-- Far wall of the road crossing -->
+        <path
+          d="M178 163V40L208 70V193Z"
+          fill="#354e5e"
+        />
+
+        <!-- Far termination wall -->
+        <path
+          d="M178 40H202L232 70H208Z"
+          fill="#536b77"
+        />
+
+        <!-- Near crossing wall: short end sections, central section cut away -->
+        <path
+          d="M202 40V69L232 99V70Z"
+          fill="#28424f"
+        />
+        <path
+          d="M202 151V187L232 217V181Z"
+          fill="#28424f"
+        />
+
+        <!-- Near roadside wall: short sections preserve depth without hiding ducts -->
+        <path
+          d="M35 187H67L97 217H65Z"
+          fill="#294450"
+        />
+        <path
+          d="M151 187H202L232 217H181Z"
+          fill="#294450"
+        />
+
+        <!-- Cutaway edge faces -->
+        <g fill="#a2b1b6">
+          <path d="M67 187L71 187L101 217H97Z"/>
+          <path d="M147 187H151L181 217H177Z"/>
+          <path d="M202 69V73L232 103V99Z"/>
+          <path d="M202 147V151L232 181V177Z"/>
+        </g>
+
+        <!-- Thin surface lips, not heavy trench outlines -->
+        <g
+          fill="none"
+          stroke="#b6c4c9"
+          stroke-width=".8"
+          stroke-opacity=".65"
+        >
+          <path d="M35 163H178V40H202"/>
+          <path d="M35 187H67"/>
+          <path d="M151 187H202V151"/>
+          <path d="M202 40V69"/>
+        </g>
+      </g>
+
+      <!-- Duct bundle sits on the recessed trench floor -->
+      <g transform="translate(0 30)">
+        <g transform="matrix(1 .5 -1 .5 410 90)">
+
+          <!-- Bedding -->
+          <path
+            d="M35 175H175Q190 175 190 160V40"
+            fill="none"
+            stroke="#b2b8b3"
+            stroke-width="21"
+            stroke-linejoin="round"
+            stroke-opacity=".45"
+          />
+
+          <!-- Contact shadow -->
+          <path
+            d="M35 177H175Q192 177 192 160V40"
+            fill="none"
+            stroke="#243b48"
+            stroke-width="18"
+            stroke-linejoin="round"
+            stroke-opacity=".7"
+          />
+
+          <!-- Three continuous conduits with controlled sweep bends -->
+          <path
+            d="M35 170H175Q185 170 185 160V40"
+            fill="none"
+            stroke="#a9bfcc"
+            stroke-width="5"
+            stroke-linejoin="round"
+            stroke-linecap="butt"
+          />
+          <path
+            class="installed-conduit"
+            d="M35 175H175Q190 175 190 160V40"
+            fill="none"
+            stroke="#dce6eb"
+            stroke-width="5.5"
+            stroke-linejoin="round"
+            stroke-linecap="butt"
+          />
+          <path
+            d="M35 180H175Q195 180 195 160V40"
+            fill="none"
+            stroke="#7da1b9"
+            stroke-width="5"
+            stroke-linejoin="round"
+            stroke-linecap="butt"
+          />
+
+          <!-- Light highlights reinforce cylindrical surfaces -->
+          <g
+            fill="none"
+            stroke="#f0f5f7"
+            stroke-width=".65"
+            stroke-opacity=".65"
+          >
+            <path d="M35 169H175Q184 169 184 160V40"/>
+            <path d="M35 174H175Q189 174 189 160V40"/>
+          </g>
+
+          <!-- Conduit mouths at the roadside cutaway -->
+          <g
+            fill="#1a3b51"
+            stroke-width="1.2"
+          >
+            <ellipse
+              cx="35" cy="170" rx="1.8" ry="2.6"
+              stroke="#c6d8e3"
+            />
+            <ellipse
+              cx="35" cy="175" rx="1.9" ry="2.8"
+              stroke="#e3edf2"
+            />
+            <ellipse
+              cx="35" cy="180" rx="1.8" ry="2.6"
+              stroke="#9cbdd2"
+            />
+          </g>
+
+          <!-- A cable is centered within the middle conduit -->
+          <path
+            class="fiber-cable-jacket"
+            d="M35 175H20"
+            fill="none"
+            stroke="#234e6b"
+            stroke-width="2.7"
+            stroke-linecap="butt"
+          />
+
+          <!-- Short internal fibers, physically connected to the jacket -->
+          <g
+            class="installed-fiber"
+            fill="none"
+            stroke-width=".65"
+            stroke-linecap="round"
+          >
+            <path d="M20 174.5H9" stroke="#dfedf5"/>
+            <path d="M20 175H7" stroke="#91bed8"/>
+            <path d="M20 175.5H10" stroke="#bcd7e8"/>
+          </g>
+
+          <!-- Far-side conduit termination -->
+          <g fill="#244b66" stroke="#d1e0e9" stroke-width=".8">
+            <ellipse cx="185" cy="40" rx="2.4" ry="1.2"/>
+            <ellipse cx="190" cy="40" rx="2.6" ry="1.3"/>
+            <ellipse cx="195" cy="40" rx="2.4" ry="1.2"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- Ground section strata -->
       <g
         fill="none"
-        stroke-linecap="butt"
+        stroke="#c0cbd0"
+        stroke-opacity=".15"
+        stroke-width="1"
       >
-        <path
-          d="M430 539L440 534M480 514L490 509"
-          stroke="#a5bac6"
-          stroke-width="5.5"
-        />
-        <path
-          d="M430 545L440 540M480 520L490 515"
-          stroke="#d5e0e5"
-          stroke-width="6.5"
-        />
-        <path
-          d="M430 551L440 546M480 526L490 521"
-          stroke="#7e9eb3"
-          stroke-width="5.5"
-        />
+        <path d="M170 228L470 378L710 258"/>
+        <path d="M170 245L470 395L710 275"/>
       </g>
-    </g>
-
-    <!-- Near-facing conduit openings -->
-    <g fill="#19384d" stroke-width="1.7">
-      <ellipse
-        cx="280" cy="614" rx="3.4" ry="4.6"
-        transform="rotate(63 280 614)"
-        stroke="#b7cbd7"
-      />
-      <ellipse
-        cx="280" cy="620" rx="3.8" ry="5"
-        transform="rotate(63 280 620)"
-        stroke="#e1e9ed"
-      />
-      <ellipse
-        cx="280" cy="626" rx="3.4" ry="4.6"
-        transform="rotate(63 280 626)"
-        stroke="#9bb9cc"
-      />
-    </g>
-
-    <!-- Cable visibly exits the center conduit -->
-    <path
-      class="fiber-cable-jacket"
-      d="M280 620L263 628.5"
-      fill="none"
-      stroke="#1e4058"
-      stroke-width="3.6"
-      stroke-linecap="round"
-    />
-
-    <!-- Cable jacket cutaway reveals connected inner strands -->
-    <g
-      class="installed-fiber"
-      fill="none"
-      stroke-linecap="round"
-      stroke-width="1"
-    >
-      <path d="M264 628L251 632L239 634" stroke="#d7e8f1"/>
-      <path d="M264 628.5L252 635L242 642" stroke="#8cb7d1"/>
-      <path d="M264 629L255 638L250 648" stroke="#b8d0df"/>
     </g>
   </g>
 
   <!-- ================================================================
        COORDINATION
-       A working envelope and a visible crossing-depth relationship.
+       Road authority corridor, work limits, and a crossing review area.
        ================================================================ -->
   <g class="assembly-frame">
+    <g transform="translate(0 155)">
 
-    <!-- Thin coordination plane -->
-    <path
-      d="M150 380L440 525V531L150 386Z"
-      fill="#52788f"
-    />
-    <path
-      d="M440 525L740 375V381L440 531Z"
-      fill="#2b5068"
-    />
-    <path
-      class="permit-plane"
-      d="M150 380L450 230L740 375L440 525Z"
-      fill="#7fa4bb"
-      fill-opacity=".18"
-      stroke="#abc5d5"
-      stroke-width="1.1"
-      stroke-opacity=".8"
-    />
-
-    <!-- Main working corridor -->
-    <path
-      class="permit-row"
-      d="M250 425L530 285L590 315L310 455Z"
-      fill="#9cbed1"
-      fill-opacity=".15"
-      stroke="#bdd2df"
-      stroke-width="1"
-      stroke-dasharray="7 5"
-    />
-
-    <!-- Existing service below the proposed alignment -->
-    <g class="coordination-existing-service">
+      <!-- Overlay edge -->
       <path
-        d="M345 358L472 421"
-        fill="none"
-        stroke="#233d4d"
-        stroke-width="13"
-        stroke-linecap="round"
+        d="M170 210L470 360V366L170 216Z"
+        fill="#50768d"
       />
       <path
-        d="M345 355L472 418"
-        fill="none"
-        stroke="#8ea4b1"
-        stroke-width="9"
-        stroke-linecap="round"
+        d="M470 360L710 240V246L470 366Z"
+        fill="#2a4f67"
       />
-      <path
-        d="M345 353L472 416"
-        fill="none"
-        stroke="#c5d4dc"
-        stroke-width="1"
-        stroke-opacity=".55"
-      />
-    </g>
 
-    <!-- Crossing work envelope -->
-    <path
-      class="permit-crossing"
-      d="M369 374L410 353L451 374L410 395Z"
-      fill="#c5d9e5"
-      fill-opacity=".12"
-      stroke="#c5d9e5"
-      stroke-width="1"
-    />
+      <g transform="matrix(1 .5 -1 .5 410 90)">
 
-    <!-- Proposed telecom alignment -->
-    <path
-      class="permit-alignment"
-      d="M280 440L560 300"
-      fill="none"
-      stroke="#e3edf2"
-      stroke-width="2.8"
-      stroke-linecap="square"
-    />
+        <!-- Full coordination plane -->
+        <path
+          class="permit-plane"
+          d="M0 0H300V240H0Z"
+          fill="#7ba1b8"
+          fill-opacity=".17"
+          stroke="#aac6d7"
+          stroke-width="1"
+          stroke-opacity=".75"
+        />
 
-    <!-- Vertical relationship at the crossing -->
-    <g
-      class="coordination-clearance"
-      fill="none"
-      stroke="#e0ebf2"
-      stroke-width="1.1"
-    >
-      <path d="M410 375V389"/>
-      <path d="M404 372L416 378"/>
-      <path d="M404 386L416 392"/>
+        <!-- Road corridor / jurisdiction envelope -->
+        <path
+          class="permit-row"
+          d="M0 60H300V160H0Z"
+          fill="#a4c3d5"
+          fill-opacity=".12"
+          stroke="#bdd2df"
+          stroke-width="1"
+          stroke-dasharray="7 5"
+        />
 
-      <!-- Short reference leader for the physical separation -->
-      <path d="M418 375L431 368V383L418 390"/>
-    </g>
+        <!-- Road references -->
+        <g
+          fill="none"
+          stroke="#adc5d4"
+          stroke-width=".8"
+          stroke-opacity=".55"
+        >
+          <path d="M0 75H300"/>
+          <path d="M0 145H300"/>
+          <path d="M0 110H300" stroke-dasharray="12 8"/>
+        </g>
 
-    <!-- Access work-area boundary -->
-    <path
-      class="coordination-work-boundary permit-work-area"
-      d="M425 350L460 332.5L495 350L460 367.5Z"
-      fill="#c6dce9"
-      fill-opacity=".1"
-      stroke="#d2e2ec"
-      stroke-width="1.3"
-      stroke-opacity=".8"
-      stroke-dasharray="5 4"
-    />
+        <!-- Defined limits of proposed roadside and crossing work -->
+        <path
+          class="coordination-work-boundary permit-work-area"
+          d="M25 157H172V30H208V193H25Z"
+          fill="#c0d7e5"
+          fill-opacity=".12"
+          stroke="#d1e2ec"
+          stroke-width="1.2"
+          stroke-dasharray="5 4"
+        />
 
-    <!-- Aligned access symbols -->
-    <g fill="#345b73" stroke="#e2ecf2" stroke-width="1.5">
-      <path d="M272 440L280 436L288 440L280 444Z"/>
-      <path d="M451 350L460 345.5L469 350L460 354.5Z"/>
-      <path d="M552 300L560 296L568 300L560 304Z"/>
-    </g>
+        <!-- Crossing review footprint -->
+        <path
+          class="permit-crossing"
+          d="M166 60H214V160H166Z"
+          fill="#c7dce8"
+          fill-opacity=".15"
+          stroke="#d7e6ee"
+          stroke-width="1.2"
+        />
 
-    <!-- Stable spatial markers, not approval icons -->
-    <g
-      fill="none"
-      stroke="#a8c5d7"
-      stroke-width="1"
-      stroke-opacity=".7"
-    >
-      <path d="M250 425L240 420M250 425L245 435"/>
-      <path d="M590 315L600 320M590 315L595 305"/>
+        <!-- Controlled hatch identifies the road-crossing interface -->
+        <g
+          class="permit-crossing-hatch"
+          fill="none"
+          stroke="#c3d9e6"
+          stroke-width=".7"
+          stroke-opacity=".45"
+        >
+          <path d="M166 72L178 60"/>
+          <path d="M166 90L196 60"/>
+          <path d="M166 108L214 60"/>
+          <path d="M166 126L214 78"/>
+          <path d="M166 144L214 96"/>
+          <path d="M168 160L214 114"/>
+          <path d="M186 160L214 132"/>
+          <path d="M204 160L214 150"/>
+        </g>
+
+        <!-- Shared telecom route -->
+        <path
+          class="permit-alignment"
+          d="M35 175H175Q190 175 190 160V40"
+          fill="none"
+          stroke="#e2edf3"
+          stroke-width="2.6"
+          stroke-linejoin="round"
+        />
+
+        <!-- Crossing entry and exit brackets -->
+        <g
+          class="coordination-clearance"
+          fill="none"
+          stroke="#e1edf4"
+          stroke-width="1.3"
+        >
+          <path d="M178 64V56H202V64"/>
+          <path d="M178 156V164H202V156"/>
+        </g>
+
+        <!--
+          One restrained review-resolution mark, anchored to the crossing.
+          Illustrative coordination state, not a guaranteed permit approval.
+        -->
+        <g class="coordination-review-mark">
+          <path
+            d="M221 80H246V105H221Z"
+            fill="#244a63"
+            stroke="#a8c8dc"
+            stroke-width=".9"
+          />
+          <path
+            d="M227 92L232 97L241 86"
+            fill="none"
+            stroke="#dfedf5"
+            stroke-width="1.7"
+            stroke-linecap="square"
+          />
+          <path
+            d="M214 92H221"
+            fill="none"
+            stroke="#b8d0df"
+            stroke-width="1"
+          />
+        </g>
+      </g>
     </g>
   </g>
 
   <!-- ================================================================
        DESIGN
-       Blueprint linework, shared alignment, and one section detail.
+       A clean blueprint of the actual road and crossing alignment.
        ================================================================ -->
   <g class="assembly-design">
 
-    <!-- Drawing sheet -->
+    <!-- Drawing-sheet thickness -->
     <path
-      d="M150 230L440 375V381L150 236Z"
-      fill="#66879b"
+      d="M170 210L470 360V366L170 216Z"
+      fill="#66869a"
     />
     <path
-      d="M440 375L740 225V231L440 381Z"
-      fill="#294b62"
-    />
-    <path
-      class="engineering-sheet"
-      d="M150 230L450 80L740 225L440 375Z"
-      fill="#23465e"
+      d="M470 360L710 240V246L470 366Z"
+      fill="#294b63"
     />
 
-    <!-- Fine inset border -->
-    <path
-      d="M166 230L450 88L724 225L440 367Z"
-      fill="none"
-      stroke="#c2d4df"
-      stroke-width=".75"
-      stroke-opacity=".65"
-    />
+    <g transform="matrix(1 .5 -1 .5 410 90)">
 
-    <!-- Quiet drafting grid -->
-    <g
-      class="blueprint-grid"
-      fill="none"
-      stroke="#a7c0d0"
-      stroke-width=".55"
-      stroke-opacity=".16"
-    >
-      <path d="M180 245L480 95"/>
-      <path d="M210 260L510 110"/>
-      <path d="M240 275L540 125"/>
-      <path d="M270 290L570 140"/>
-      <path d="M300 305L600 155"/>
-      <path d="M330 320L630 170"/>
-      <path d="M360 335L660 185"/>
-      <path d="M390 350L690 200"/>
-
-      <path d="M180 215L470 360"/>
-      <path d="M210 200L500 345"/>
-      <path d="M240 185L530 330"/>
-      <path d="M270 170L560 315"/>
-      <path d="M300 155L590 300"/>
-      <path d="M330 140L620 285"/>
-      <path d="M360 125L650 270"/>
-      <path d="M390 110L680 255"/>
-      <path d="M420 95L710 240"/>
-    </g>
-
-    <!-- Road / corridor edges -->
-    <g
-      fill="none"
-      stroke="#d4e1e9"
-      stroke-width="1"
-      stroke-opacity=".9"
-    >
-      <path d="M250 275L530 135"/>
-      <path d="M310 305L590 165"/>
-    </g>
-
-    <!-- Centerline -->
-    <path
-      d="M280 290L560 150"
-      fill="none"
-      stroke="#a7c0d0"
-      stroke-width=".8"
-      stroke-dasharray="10 6"
-    />
-
-    <!-- Right-of-way boundaries -->
-    <g
-      fill="none"
-      stroke="#89aabd"
-      stroke-width=".8"
-      stroke-dasharray="5 4"
-    >
-      <path d="M235 267.5L515 127.5"/>
-      <path d="M325 312.5L605 172.5"/>
-    </g>
-
-    <!-- Parcel context -->
-    <g
-      class="engineering-parcels"
-      fill="none"
-      stroke="#a5becf"
-      stroke-width=".8"
-      stroke-opacity=".7"
-    >
-      <path d="M181 230L257 192L300 213.5L224 251.5Z"/>
-      <path d="M277 182L353 144L396 165.5L320 203.5Z"/>
-      <path d="M470 320L546 282L589 303.5L513 341.5Z"/>
-      <path d="M566 272L642 234L685 255.5L609 293.5Z"/>
-    </g>
-
-    <!-- Existing utility crossing -->
-    <path
-      d="M345 192.5L472 256"
-      fill="none"
-      stroke="#a7bdca"
-      stroke-width="1.2"
-      stroke-dasharray="2 4"
-    />
-
-    <!-- Primary designed alignment -->
-    <path
-      class="design-primary-alignment proposed-telecom-route"
-      d="M280 290L560 150"
-      fill="none"
-      stroke="#f4f8fa"
-      stroke-width="3.6"
-      stroke-linecap="square"
-    />
-
-    <!-- Perpendicular route ticks -->
-    <g
-      fill="none"
-      stroke="#ecf3f7"
-      stroke-width="1"
-    >
-      <path d="M324 265L336 271"/>
-      <path d="M374 240L386 246"/>
-      <path d="M424 215L436 221"/>
-      <path d="M474 190L486 196"/>
-      <path d="M524 165L536 171"/>
-    </g>
-
-    <!-- Access symbols -->
-    <g
-      class="engineering-access-points"
-      fill="#23465e"
-      stroke="#f0f6f9"
-      stroke-width="1.6"
-    >
-      <path d="M272 290L280 286L288 290L280 294Z"/>
-      <path d="M451 200L460 195.5L469 200L460 204.5Z"/>
-      <path d="M552 150L560 146L568 150L560 154Z"/>
-    </g>
-
-    <!-- Dimension line hierarchy -->
-    <g
-      class="engineering-dimensions"
-      fill="none"
-      stroke="#c0d4e1"
-      stroke-width=".8"
-    >
-      <path d="M280 290L294 312"/>
-      <path d="M460 200L474 222"/>
-      <path d="M560 150L574 172"/>
-
-      <path d="M294 308L574 168"/>
-      <path d="M290 305L298 311"/>
-      <path d="M470 215L478 221"/>
-      <path d="M570 165L578 171"/>
-
-      <!-- Offset dimension -->
-      <path d="M235 267.5L222 261"/>
-      <path d="M250 275L237 268.5"/>
-      <path d="M224 257L239 264.5"/>
-      <path d="M221 260L227 254"/>
-      <path d="M236 267.5L242 261.5"/>
-    </g>
-
-    <!-- One integrated conduit-section detail -->
-    <g
-      class="engineering-detail"
-      fill="none"
-      stroke="#c7d9e5"
-      stroke-width=".9"
-    >
-      <!-- Detail boundary -->
-      <path d="M360 143L415 115.5L470 143L415 170.5Z"/>
-
-      <!-- Excavation section -->
-      <path d="M380 141L394 148V159L432 140V129L446 136"/>
-
-      <!-- Conduit cross-sections -->
-      <ellipse
-        cx="402" cy="148" rx="3.7" ry="2.2"
-        transform="rotate(-26.5 402 148)"
-      />
-      <ellipse
-        cx="414" cy="142" rx="3.7" ry="2.2"
-        transform="rotate(-26.5 414 142)"
-      />
-      <ellipse
-        cx="426" cy="136" rx="3.7" ry="2.2"
-        transform="rotate(-26.5 426 136)"
+      <!-- Drawing surface -->
+      <path
+        class="engineering-sheet"
+        d="M0 0H300V240H0Z"
+        fill="#23465e"
       />
 
-      <!-- Fine bedding reference -->
-      <path d="M396 162L434 143"/>
-    </g>
+      <!-- Fine sheet border -->
+      <path
+        d="M9 9H291V231H9Z"
+        fill="none"
+        stroke="#bcd1df"
+        stroke-width=".7"
+        stroke-opacity=".6"
+      />
 
-    <!-- Sheet corner marks -->
-    <g
-      fill="none"
-      stroke="#d0e1eb"
-      stroke-width=".8"
-      stroke-opacity=".65"
-    >
-      <path d="M174 230L186 224M174 230L186 236"/>
-      <path d="M450 96L438 102M450 96L462 102"/>
-      <path d="M716 225L704 219M716 225L704 231"/>
+      <!-- Quiet drafting grid -->
+      <g
+        class="blueprint-grid"
+        fill="none"
+        stroke="#a3bdcf"
+        stroke-width=".5"
+        stroke-opacity=".14"
+      >
+        <path d="M30 10V230M60 10V230M90 10V230"/>
+        <path d="M120 10V230M150 10V230M180 10V230"/>
+        <path d="M210 10V230M240 10V230M270 10V230"/>
+        <path d="M10 30H290M10 60H290M10 90H290"/>
+        <path d="M10 120H290M10 150H290M10 180H290"/>
+        <path d="M10 210H290"/>
+      </g>
+
+      <!-- Road edges -->
+      <g
+        fill="none"
+        stroke="#dbe7ef"
+        stroke-width="1.4"
+      >
+        <path d="M10 75H290"/>
+        <path d="M10 145H290"/>
+      </g>
+
+      <!-- Shoulder references -->
+      <g
+        fill="none"
+        stroke="#97b6cb"
+        stroke-width=".8"
+        stroke-opacity=".85"
+      >
+        <path d="M10 68H290"/>
+        <path d="M10 152H290"/>
+      </g>
+
+      <!-- Road centerline -->
+      <path
+        d="M10 110H290"
+        fill="none"
+        stroke="#b4ccdc"
+        stroke-width=".9"
+        stroke-dasharray="15 5 3 5"
+      />
+
+      <!-- Right-of-way boundaries -->
+      <g
+        fill="none"
+        stroke="#94b3c7"
+        stroke-width=".8"
+        stroke-dasharray="6 4"
+      >
+        <path d="M10 60H290"/>
+        <path d="M10 160H290"/>
+      </g>
+
+      <!-- Main proposed route: roadside run, sweep, road crossing -->
+      <path
+        class="design-primary-alignment proposed-telecom-route"
+        d="M35 175H175Q190 175 190 160V40"
+        fill="none"
+        stroke="#f4f8fb"
+        stroke-width="3.1"
+        stroke-linecap="square"
+        stroke-linejoin="round"
+      />
+
+      <!-- Thin companion line gives the proposed corridor definition -->
+      <path
+        d="M35 180H175Q195 180 195 160V40"
+        fill="none"
+        stroke="#b4d3e7"
+        stroke-width=".85"
+      />
+
+      <!-- Purposeful alignment ticks -->
+      <g
+        fill="none"
+        stroke="#dceaf3"
+        stroke-width=".85"
+      >
+        <path d="M65 171V179"/>
+        <path d="M100 171V179"/>
+        <path d="M135 171V179"/>
+        <path d="M186 135H194"/>
+        <path d="M186 100H194"/>
+        <path d="M186 65H194"/>
+      </g>
+
+      <!-- Dimension strings: no numbers or labels -->
+      <g
+        class="engineering-dimensions"
+        fill="none"
+        stroke="#b7cfdf"
+        stroke-width=".75"
+      >
+        <!-- Roadside run -->
+        <path d="M35 185V208"/>
+        <path d="M175 185V208"/>
+        <path d="M35 202H175"/>
+        <path d="M32 205L38 199"/>
+        <path d="M172 205L178 199"/>
+
+        <!-- Crossing length -->
+        <path d="M202 40H227"/>
+        <path d="M202 160H227"/>
+        <path d="M221 40V160"/>
+        <path d="M218 43L224 37"/>
+        <path d="M218 163L224 157"/>
+
+        <!-- Roadside offset -->
+        <path d="M254 145H276"/>
+        <path d="M254 175H276"/>
+        <path d="M270 145V175"/>
+        <path d="M267 148L273 142"/>
+        <path d="M267 178L273 172"/>
+      </g>
+
+      <!-- Precise crossing limits -->
+      <g
+        fill="none"
+        stroke="#c2d9e8"
+        stroke-width=".8"
+        stroke-dasharray="3 3"
+      >
+        <path d="M178 65V155"/>
+        <path d="M202 65V155"/>
+      </g>
+
+      <!-- Minimal drawing-corner registration -->
+      <g
+        fill="none"
+        stroke="#c5dbe9"
+        stroke-width=".8"
+        stroke-opacity=".7"
+      >
+        <path d="M16 25V16H25"/>
+        <path d="M275 16H284V25"/>
+        <path d="M16 215V224H25"/>
+        <path d="M275 224H284V215"/>
+      </g>
     </g>
   </g>
 
   <!-- ================================================================
        STATIONARY LABELS
-       Outside the animated groups so they never fade or drift.
+       Only three labels, outside the animated artwork.
        ================================================================ -->
   <g
     class="assembly-labels"
@@ -781,15 +733,15 @@
       stroke-width="1"
       stroke-opacity=".65"
     >
-      <path d="M38 296H101L145 274"/>
-      <path d="M38 461H101L145 439"/>
-      <path d="M38 654H101L145 632"/>
+      <path d="M40 288H108L164 260"/>
+      <path d="M40 453H108L164 425"/>
+      <path d="M40 641H108L164 613"/>
     </g>
 
     <g fill="#d4dfe5">
-      <text x="38" y="285">Design</text>
-      <text x="38" y="450">Coordination</text>
-      <text x="38" y="643">Installation</text>
+      <text x="40" y="277">Design</text>
+      <text x="40" y="442">Coordination</text>
+      <text x="40" y="630">Installation</text>
     </g>
   </g>
 
@@ -883,17 +835,18 @@
             role="img"
             aria-labelledby="hero-art-title hero-art-description"
           >
-         <title id="hero-art-title">
-  Telecom infrastructure: design, coordination, and installation
+       <title id="hero-art-title">
+  Telecom utilities alongside and beneath a road
 </title>
 <desc id="hero-art-description">
-  Three aligned layers illustrate a conceptual telecom project.
-  The top is a blue engineering drawing with white route linework,
-  dimensions, and access structures. The middle overlays a working
-  corridor, crossing interface, and access work area. The bottom
-  shows an open trench containing multiple conduits, exposed cable
-  strands, and an underground access chamber. The illustration is
-  conceptual and not to scale.
+  Three aligned layers show the same conceptual road corridor.
+  A blueprint drawing shows a telecom route running along the roadside
+  before turning to cross beneath the street. A coordination overlay
+  identifies the working corridor, crossing review area, and work limits.
+  The installation layer shows the road interrupted by an open crossing
+  excavation, with three conduits following the same route inside a
+  recessed trench. A cable is visible within one conduit at the cutaway end.
+  Illustrative only and not to scale.
 </desc>
             <use href="#infrastructure-assembly"/>
           </svg>
