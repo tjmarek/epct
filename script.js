@@ -1,39 +1,56 @@
 (() => {
   "use strict";
 
-  const motionPreference = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  );
-
   const header = document.querySelector("#site-header");
   const menuToggle = document.querySelector(".menu-toggle");
   const navigation = document.querySelector("#primary-navigation");
-  const mobileViewport = window.matchMedia("(max-width: 900px)");
-
   const main = document.querySelector("main");
   const footer = document.querySelector(".site-footer");
 
-  let menuIsOpen = false;
-  let previousBodyOverflow = "";
-  let focusBeforeMenu = null;
+  const mobileViewport = window.matchMedia("(max-width: 900px)");
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
 
-  /* -----------------------------------------------------------------------
-     MOBILE NAVIGATION
-     ----------------------------------------------------------------------- */
+  let menuIsOpen = false;
+  let focusBeforeMenu = null;
+  let previousBodyOverflow = "";
+
+  const inertStates = new Map();
+
+  /* ======================================================================
+     01 / MOBILE NAVIGATION
+     ====================================================================== */
 
   const getNavigationLinks = () => {
     if (!navigation) return [];
+
     return [...navigation.querySelectorAll("a[href]")];
   };
 
-  const setBackgroundInert = (inert) => {
+  const lockBackground = () => {
     [main, footer].forEach((element) => {
-      if (element) element.inert = inert;
+      if (!element) return;
+
+      inertStates.set(element, element.hasAttribute("inert"));
+      element.setAttribute("inert", "");
     });
   };
 
+  const unlockBackground = () => {
+    inertStates.forEach((wasInert, element) => {
+      if (wasInert) {
+        element.setAttribute("inert", "");
+      } else {
+        element.removeAttribute("inert");
+      }
+    });
+
+    inertStates.clear();
+  };
+
   const closeMenu = ({ restoreFocus = false } = {}) => {
-    if (!header || !menuToggle || !navigation) return;
+    if (!menuToggle || !navigation) return;
 
     const wasOpen = menuIsOpen;
 
@@ -48,7 +65,7 @@
       document.body.style.overflow = previousBodyOverflow;
     }
 
-    setBackgroundInert(false);
+    unlockBackground();
 
     navigation.hidden = mobileViewport.matches;
 
@@ -56,7 +73,7 @@
       const focusTarget =
         focusBeforeMenu instanceof HTMLElement &&
         focusBeforeMenu.isConnected &&
-        !focusBeforeMenu.hidden
+        focusBeforeMenu.getClientRects().length
           ? focusBeforeMenu
           : menuToggle;
 
@@ -66,7 +83,6 @@
 
   const openMenu = () => {
     if (
-      !header ||
       !menuToggle ||
       !navigation ||
       !mobileViewport.matches ||
@@ -77,8 +93,8 @@
 
     focusBeforeMenu = document.activeElement;
     previousBodyOverflow = document.body.style.overflow;
-    menuIsOpen = true;
 
+    menuIsOpen = true;
     navigation.hidden = false;
 
     menuToggle.setAttribute("aria-expanded", "true");
@@ -87,13 +103,13 @@
     document.body.classList.add("menu-open");
     document.body.style.overflow = "hidden";
 
-    setBackgroundInert(true);
+    lockBackground();
 
     getNavigationLinks()[0]?.focus({ preventScroll: true });
   };
 
   const synchronizeNavigation = () => {
-    if (!header || !menuToggle || !navigation) return;
+    if (!menuToggle || !navigation) return;
 
     const activeElement = document.activeElement;
     const focusWasInNavigation = navigation.contains(activeElement);
@@ -158,70 +174,116 @@
       }
     });
 
-    navigation.addEventListener("click", (event) => {
-      const link = event.target.closest("a[href]");
+    document.addEventListener("focusin", (event) => {
+      if (!menuIsOpen) return;
 
-      if (!link || !menuIsOpen) return;
+      const focusIsInsideMenu =
+        navigation.contains(event.target) ||
+        menuToggle.contains(event.target);
 
-      const href = link.getAttribute("href");
-      const target =
-        href?.startsWith("#") && href.length > 1
-          ? document.getElementById(href.slice(1))
-          : null;
-
-      closeMenu();
-
-      if (target) {
-        const hadTabIndex = target.hasAttribute("tabindex");
-
-        if (!hadTabIndex) {
-          target.setAttribute("tabindex", "-1");
-        }
-
-        target.focus({ preventScroll: true });
-
-        if (!hadTabIndex) {
-          target.addEventListener(
-            "blur",
-            () => target.removeAttribute("tabindex"),
-            { once: true }
-          );
-        }
-      } else {
+      if (!focusIsInsideMenu) {
         menuToggle.focus({ preventScroll: true });
       }
     });
   }
 
-  /* -----------------------------------------------------------------------
-     HEADER SCROLL STATE
-     ----------------------------------------------------------------------- */
+  /* ======================================================================
+     02 / SAME-PAGE NAVIGATION
+     Keep native scrolling, browser history, and reduced-motion behavior.
+     ====================================================================== */
+
+  const focusSection = (section) => {
+    const hadTabIndex = section.hasAttribute("tabindex");
+
+    if (!hadTabIndex) {
+      section.setAttribute("tabindex", "-1");
+    }
+
+    section.focus({ preventScroll: true });
+
+    if (!hadTabIndex) {
+      section.addEventListener(
+        "blur",
+        () => section.removeAttribute("tabindex"),
+        { once: true }
+      );
+    }
+  };
+
+  document.addEventListener("click", (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    const link = event.target.closest?.('a[href^="#"]');
+
+    if (!link || link.hasAttribute("download")) return;
+    if (link.target && link.target !== "_self") return;
+
+    const href = link.getAttribute("href");
+
+    if (!href || href === "#") return;
+
+    let targetId;
+
+    try {
+      targetId = decodeURIComponent(href.slice(1));
+    } catch {
+      return;
+    }
+
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    if (menuIsOpen) {
+      closeMenu();
+    }
+
+    revealTarget(target);
+    focusSection(target);
+
+    // Do not preventDefault: the anchor retains native URL and scroll behavior.
+  });
+
+  /* ======================================================================
+     03 / HEADER SCROLL STATE
+     The stylesheet keeps the header in normal flow when it becomes sticky.
+     ====================================================================== */
+
+  let headerUpdatePending = false;
+
+  const updateHeader = () => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 48);
+    headerUpdatePending = false;
+  };
 
   if (header) {
-    let scrollUpdatePending = false;
-
-    const updateHeader = () => {
-      header.classList.toggle("is-scrolled", window.scrollY > 48);
-      scrollUpdatePending = false;
-    };
-
     updateHeader();
 
     window.addEventListener(
       "scroll",
       () => {
-        if (scrollUpdatePending) return;
+        if (headerUpdatePending) return;
 
-        scrollUpdatePending = true;
+        headerUpdatePending = true;
         window.requestAnimationFrame(updateHeader);
       },
       { passive: true }
     );
   }
 
-  /* -----------------------------------------------------------------------
-     SECTION REVEALS
-     ----------------------------------------------------------------------- */
+  /* ======================================================================
+     04 / RESTRAINED SECTION REVEALS
+     Content is visible by default. Animation is optional enhancement.
+     ====================================================================== */
 
   const revealElements = [
     ...document.querySelectorAll("[data-reveal]")
@@ -230,7 +292,26 @@
   let revealObserver = null;
   let revealSafetyTimer = null;
 
-  const showAllSections = () => {
+  const showElement = (element) => {
+    element.classList.add("is-visible");
+    revealObserver?.unobserve(element);
+  };
+
+  function revealTarget(target) {
+    const parentReveal = target.closest?.("[data-reveal]");
+
+    if (parentReveal) {
+      showElement(parentReveal);
+    }
+
+    if (target.matches?.("[data-reveal]")) {
+      showElement(target);
+    }
+
+    target.querySelectorAll?.("[data-reveal]").forEach(showElement);
+  }
+
+  const showAllContent = () => {
     revealObserver?.disconnect();
     window.clearTimeout(revealSafetyTimer);
 
@@ -241,268 +322,148 @@
     document.documentElement.classList.remove("reveal-ready");
   };
 
-  if (
-    !motionPreference.matches &&
-    "IntersectionObserver" in window &&
-    revealElements.length
-  ) {
+  const initializeReveals = () => {
+    if (
+      reducedMotion.matches ||
+      !("IntersectionObserver" in window) ||
+      !revealElements.length
+    ) {
+      return;
+    }
+
     try {
       revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
+            if (entry.isIntersecting) {
+              showElement(entry.target);
+            }
           });
         },
         {
           threshold: 0,
-          rootMargin: "0px 0px 40px 0px"
+          rootMargin: "0px 0px 60px 0px"
         }
       );
 
       revealElements.forEach((element) => {
-        revealObserver.observe(element);
+        const bounds = element.getBoundingClientRect();
+
+        // Leave already visible content untouched during initialization.
+        if (bounds.top < window.innerHeight) {
+          element.classList.add("is-visible");
+        } else {
+          revealObserver.observe(element);
+        }
       });
 
       document.documentElement.classList.add("reveal-ready");
 
-      document.addEventListener("focusin", (event) => {
-        const section = event.target.closest?.("[data-reveal]");
-
-        if (section) {
-          section.classList.add("is-visible");
-          revealObserver?.unobserve(section);
-        }
-      });
-
-      // Never leave content hidden indefinitely.
-      revealSafetyTimer = window.setTimeout(showAllSections, 12000);
+      // Fail open rather than leaving content hidden indefinitely.
+      revealSafetyTimer = window.setTimeout(showAllContent, 15000);
     } catch {
-      showAllSections();
+      showAllContent();
     }
-  }
+  };
 
-  /* -----------------------------------------------------------------------
-     DELIVERY PROCESS INDICATOR
-     ----------------------------------------------------------------------- */
+  initializeReveals();
 
-  const processSteps = [
-    ...document.querySelectorAll(".process-step")
+  document.addEventListener("focusin", (event) => {
+    const revealElement = event.target.closest?.("[data-reveal]");
+
+    if (revealElement) {
+      showElement(revealElement);
+    }
+  });
+
+  /* ======================================================================
+     05 / OPTIONAL PHOTOGRAPHY
+     Keep the graphic fallback when an image has not been supplied.
+     ====================================================================== */
+
+  const optionalImages = [
+    ...document.querySelectorAll(
+      ".hero-image-frame > img, .capabilities-media > img"
+    )
   ];
 
-  const processFill = document.querySelector(".process-indicator-fill");
-  const processCount = document.querySelector(".process-indicator-count");
+  optionalImages.forEach((image) => {
+    const frame = image.parentElement;
 
-  const updateProcess = () => {
-    if (!processSteps.length) return;
+    const markImageLoaded = () => {
+      if (!image.naturalWidth) return;
 
-    const readingPosition = window.innerHeight * 0.52;
-    let activeIndex = 0;
-
-    processSteps.forEach((step, index) => {
-      if (step.getBoundingClientRect().top <= readingPosition) {
-        activeIndex = index;
-      }
-    });
-
-    processSteps.forEach((step, index) => {
-      step.classList.toggle("is-active", index === activeIndex);
-    });
-
-    if (processFill) {
-      const progress = (activeIndex + 1) / processSteps.length;
-      processFill.style.transform = `scaleX(${progress})`;
-    }
-
-    if (processCount) {
-      const current = String(activeIndex + 1).padStart(2, "0");
-      const total = String(processSteps.length).padStart(2, "0");
-
-      processCount.textContent = `${current} — ${total}`;
-    }
-  };
-
-  if (processSteps.length) {
-    let processUpdatePending = false;
-
-    const scheduleProcessUpdate = () => {
-      if (processUpdatePending) return;
-
-      processUpdatePending = true;
-
-      window.requestAnimationFrame(() => {
-        updateProcess();
-        processUpdatePending = false;
-      });
+      image.hidden = false;
+      frame?.classList.add("has-photograph");
     };
 
-    updateProcess();
+    const markImageMissing = () => {
+      image.hidden = true;
+      frame?.classList.remove("has-photograph");
+    };
 
-    window.addEventListener("scroll", scheduleProcessUpdate, {
-      passive: true
-    });
+    image.addEventListener("load", markImageLoaded);
+    image.addEventListener("error", markImageMissing);
 
-    window.addEventListener("resize", scheduleProcessUpdate, {
-      passive: true
-    });
-  }
-
-  /* -----------------------------------------------------------------------
-     HERO ROUTE ANIMATION
-     ----------------------------------------------------------------------- */
-
-  const hero = document.querySelector(".hero");
-  const surfaceRoute = document.querySelector(".route-path-surface");
-  const signal = document.querySelector(".route-signal");
-  const signalGlow = document.querySelector(".route-signal-glow");
-
-  let heroStartFrame = null;
-  let signalFrame = null;
-  let signalTimer = null;
-  let heroFinishTimer = null;
-
-  const hideSignal = () => {
-    [signal, signalGlow].forEach((element) => {
-      if (element) element.setAttribute("opacity", "0");
-    });
-  };
-
-  const stopHeroAnimation = () => {
-    window.cancelAnimationFrame(heroStartFrame);
-    window.cancelAnimationFrame(signalFrame);
-    window.clearTimeout(signalTimer);
-    window.clearTimeout(heroFinishTimer);
-
-    hero?.classList.remove("is-animating");
-
-    hideSignal();
-  };
-
-  const animateSignal = () => {
-    if (
-      motionPreference.matches ||
-      document.hidden ||
-      !surfaceRoute ||
-      !signal ||
-      !signalGlow
-    ) {
-      return;
-    }
-
-    const heroBounds = hero?.getBoundingClientRect();
-
-    if (
-      !heroBounds ||
-      heroBounds.bottom <= 0 ||
-      heroBounds.top >= window.innerHeight
-    ) {
-      return;
-    }
-
-    const routeLength = surfaceRoute.getTotalLength();
-    const duration = 1700;
-    let startedAt = null;
-
-    const tick = (timestamp) => {
-      if (motionPreference.matches || document.hidden) {
-        hideSignal();
-        return;
-      }
-
-      if (startedAt === null) startedAt = timestamp;
-
-      const progress = Math.min((timestamp - startedAt) / duration, 1);
-      const point = surfaceRoute.getPointAtLength(routeLength * progress);
-
-      const fadeIn = Math.min(progress / 0.12, 1);
-      const fadeOut = Math.min((1 - progress) / 0.15, 1);
-      const opacity = Math.max(0, Math.min(fadeIn, fadeOut));
-
-      [signal, signalGlow].forEach((element) => {
-        element.setAttribute("cx", String(point.x));
-        element.setAttribute("cy", String(point.y));
-      });
-
-      signal.setAttribute("opacity", String(opacity));
-      signalGlow.setAttribute("opacity", String(opacity * 0.65));
-
-      if (progress < 1) {
-        signalFrame = window.requestAnimationFrame(tick);
+    if (image.complete) {
+      if (image.naturalWidth) {
+        markImageLoaded();
       } else {
-        hideSignal();
+        markImageMissing();
       }
-    };
-
-    signalFrame = window.requestAnimationFrame(tick);
-  };
-
-  if (hero && !motionPreference.matches && !document.hidden) {
-    heroStartFrame = window.requestAnimationFrame(() => {
-      if (motionPreference.matches || document.hidden) return;
-
-      hero.classList.add("is-animating");
-
-      signalTimer = window.setTimeout(animateSignal, 3250);
-
-      heroFinishTimer = window.setTimeout(() => {
-        hero.classList.remove("is-animating");
-      }, 5300);
-    });
-  }
-
-  /* -----------------------------------------------------------------------
-     USER PREFERENCES & PAGE LIFECYCLE
-     ----------------------------------------------------------------------- */
-
-  motionPreference.addEventListener("change", (event) => {
-    if (!event.matches) return;
-
-    showAllSections();
-    stopHeroAnimation();
-  });
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopHeroAnimation();
     }
   });
 
-  window.addEventListener("pagehide", () => {
-    closeMenu();
-    stopHeroAnimation();
-    showAllSections();
-  });
-
-  window.addEventListener("pageshow", () => {
-    updateProcess();
-  });
-
-  /* -----------------------------------------------------------------------
-     PROTOTYPE FORM SAFEGUARD
-     ----------------------------------------------------------------------- */
+  /* ======================================================================
+     06 / PROTOTYPE FORM
+     Never imply that an inquiry has been sent.
+     ====================================================================== */
 
   const projectForm = document.querySelector("#project-form");
+  const formNotice = document.querySelector("#form-notice");
 
   if (projectForm) {
     projectForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const notice = document.querySelector("#form-notice");
-
-      if (notice) {
-        notice.textContent =
-          "This is a preview only. Project inquiries are not being sent.";
-
-        notice.setAttribute("role", "status");
+      if (formNotice) {
+        formNotice.setAttribute("role", "status");
+        formNotice.textContent =
+          "This is a private preview. Inquiry submission is not connected, " +
+          "and no project information has been sent.";
       }
     });
   }
 
-  /* -----------------------------------------------------------------------
-     FOOTER YEAR
-     ----------------------------------------------------------------------- */
+  /* ======================================================================
+     07 / PREFERENCES & PAGE LIFECYCLE
+     ====================================================================== */
+
+  reducedMotion.addEventListener("change", (event) => {
+    if (event.matches) {
+      showAllContent();
+    }
+  });
+
+  window.addEventListener("beforeprint", showAllContent);
+
+  window.addEventListener("pagehide", () => {
+    closeMenu();
+    showAllContent();
+  });
+
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+      synchronizeNavigation();
+      showAllContent();
+    }
+
+    updateHeader();
+  });
+
+  /* ======================================================================
+     08 / COPYRIGHT
+     ====================================================================== */
 
   const copyrightYear = document.querySelector("#copyright-year");
 
