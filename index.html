@@ -90,126 +90,454 @@
         <stop offset="1" stop-color="#1b303e"/>
       </linearGradient>
 
-      <!--
-        Abstract architectural assembly:
-        a design plane, an approval frame, and a construction foundation.
-        These shapes are brand graphics, not engineering representations.
-      -->
-      <symbol id="infrastructure-assembly" viewBox="0 0 820 760">
-        <g class="assembly-reference" fill="none" stroke="currentColor">
-          <path d="M96 550L418 711L747 546" opacity=".13"/>
-          <path d="M418 711V735M96 550L75 540M747 546L768 535" opacity=".2"/>
-        </g>
+     <!--
+  Conceptual telecom delivery illustration.
+  Not to scale. Not an engineering or installation detail.
 
-        <g class="assembly-foundation">
-          <path
-            class="foundation-left"
-            d="M110 476L420 631V683L110 528Z"
-            fill="url(#foundation-front)"
-          />
-          <path
-            class="foundation-right"
-            d="M420 631L724 479V531L420 683Z"
-            fill="#203747"
-          />
-          <path
-            class="foundation-surface"
-            d="M110 476L414 324L724 479L420 631Z"
-            fill="url(#foundation-top)"
-          />
-          <path
-            d="M110 476L420 631L724 479"
-            fill="none"
-            stroke="#9bafb9"
-            stroke-opacity=".45"
-          />
-          <path
-            class="foundation-inset"
-            d="M205 477L414 373L628 479L419 584Z"
-            fill="#1b303e"
-            fill-opacity=".42"
-            stroke="#77909f"
-            stroke-opacity=".35"
-          />
-        </g>
+  Existing animation groups are preserved:
+  .assembly-design      — corridor and proposed alignment
+  .assembly-frame       — permitting and coordination
+  .assembly-foundation  — underground conduit and fiber installation
+-->
+<symbol id="infrastructure-assembly" viewBox="0 0 820 760">
 
-        <g class="assembly-frame">
-          <path
-            d="M493 137L526 120L526 451L493 468Z"
-            fill="#29485e"
-          />
-          <path
-            d="M493 137L665 223L698 206L526 120Z"
-            fill="#94abb9"
-          />
-          <path
-            d="M665 223L698 206V537L665 554Z"
-            fill="#233f53"
-          />
-          <path
-            d="M493 137L665 223V554L493 468Z
-               M519 190V442L639 502V250Z"
-            fill="url(#frame-face)"
-            fill-rule="evenodd"
-          />
-          <path
-            d="M519 190L539 200V432L639 482V502L519 442Z"
-            fill="#a3b7c2"
-            fill-opacity=".55"
-          />
-          <path
-            d="M493 137L665 223V554"
-            fill="none"
-            stroke="#b4c5cf"
-            stroke-opacity=".55"
-          />
-        </g>
+  <!-- SHARED GROUND REFERENCE -->
+  <g
+    class="assembly-reference"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1"
+  >
+    <path d="M68 543L421 720L756 552" opacity=".15"/>
+    <path d="M421 720V741" opacity=".3"/>
+    <path d="M68 543L49 533M756 552L775 542" opacity=".3"/>
+  </g>
 
-        <g class="assembly-design">
-          <path
-            d="M94 306L383 451V477L94 332Z"
-            fill="url(#plane-front)"
-          />
-          <path
-            d="M383 451L669 308V334L383 477Z"
-            fill="url(#plane-side)"
-          />
-          <path
-            d="M94 306L380 163L669 308L383 451Z"
-            fill="url(#plane-top)"
-          />
-          <path
-            d="M94 306L383 451L669 308"
-            fill="none"
-            stroke="#ffffff"
-            stroke-opacity=".7"
-          />
+  <!-- ================================================================
+       INSTALL / UNDERGROUND INFRASTRUCTURE
+       ================================================================ -->
+  <g class="assembly-foundation">
 
-          <g
-            class="design-alignments"
-            fill="none"
-            stroke="#365161"
-            stroke-width="1.2"
-          >
-            <path d="M167 306L380 200L596 308" opacity=".35"/>
-            <path d="M239 343L453 236" opacity=".25"/>
-            <path d="M311 379L524 272" opacity=".25"/>
-            <path d="M238 271L454 379" opacity=".25"/>
-            <path d="M310 235L527 343" opacity=".25"/>
-            <path
-              class="design-primary-alignment"
-              d="M167 306L310 377L453 306L524 342L596 306"
-              stroke="#294d65"
-              stroke-width="3"
-            />
-          </g>
+    <!-- Ground volume -->
+    <path
+      d="M91 443L421 608V674L91 509Z"
+      fill="#344c59"
+    />
+    <path
+      d="M421 608L728 454V520L421 674Z"
+      fill="#203744"
+    />
+    <path
+      d="M91 443L398 289L728 454L421 608Z"
+      fill="#506875"
+    />
 
-          <path
-            d="M372 301L383 296L394 301L383 307Z"
-            fill="#294d65"
-          />
-        </g>
-      </symbol>
+    <!-- Ground strata -->
+    <g
+      fill="none"
+      stroke="#9bafb9"
+      stroke-width="1"
+      stroke-opacity=".23"
+    >
+      <path d="M91 465L421 630L728 476"/>
+      <path d="M91 487L421 652L728 498"/>
+    </g>
+
+    <!-- Open utility corridor through the conceptual ground section -->
+    <path
+      d="M154 439L296 510L461 428L624 510L652 496
+         L461 400L296 482L182 425Z"
+      fill="#142b38"
+    />
+
+    <!-- Trench side surfaces -->
+    <path
+      d="M154 439L296 510L461 428L624 510V536
+         L461 454L296 536L154 465Z"
+      fill="#243e4d"
+    />
+    <path
+      d="M182 425L296 482L461 400L652 496V522
+         L461 426L296 508L182 451Z"
+      fill="#78909b"
+      fill-opacity=".65"
+    />
+
+    <!-- Secondary conduit: subdued outer casing -->
+    <path
+      d="M163 458L296 524L461 442L636 529"
+      fill="none"
+      stroke="#1b303d"
+      stroke-width="18"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M163 458L296 524L461 442L636 529"
+      fill="none"
+      stroke="#8296a1"
+      stroke-width="11"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Primary conduit -->
+    <path
+      d="M176 442L296 502L461 420L648 513"
+      fill="none"
+      stroke="#142b38"
+      stroke-width="23"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M176 442L296 502L461 420L648 513"
+      fill="none"
+      stroke="#c2cdd2"
+      stroke-width="16"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Fiber within conduit: conceptual exposed section -->
+    <path
+      class="installed-fiber"
+      d="M176 442L296 502L461 420L648 513"
+      fill="none"
+      stroke="#365e79"
+      stroke-width="6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M176 440L296 500L461 418L648 511"
+      fill="none"
+      stroke="#e6eef2"
+      stroke-opacity=".65"
+      stroke-width="1.3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Conduit termination / visible end -->
+    <ellipse
+      cx="648"
+      cy="513"
+      rx="8"
+      ry="11"
+      transform="rotate(-27 648 513)"
+      fill="#213d50"
+      stroke="#d0dadd"
+      stroke-width="3"
+    />
+    <ellipse
+      cx="648"
+      cy="513"
+      rx="3"
+      ry="5"
+      transform="rotate(-27 648 513)"
+      fill="#acc6d7"
+    />
+
+    <!-- Underground access structure -->
+    <g class="telecom-access-structure">
+      <path
+        d="M423 373L461 392V449L423 430Z"
+        fill="#9aabb3"
+      />
+      <path
+        d="M461 392L499 373V430L461 449Z"
+        fill="#647e8e"
+      />
+      <path
+        d="M423 373L461 354L499 373L461 392Z"
+        fill="#d2dbde"
+      />
+      <path
+        d="M434 373L461 360L488 373L461 386Z"
+        fill="#263f4e"
+      />
+      <path
+        d="M442 373L461 364L480 373L461 382Z"
+        fill="#152b38"
+      />
+    </g>
+
+    <!-- Installation labels -->
+    <g
+      fill="none"
+      stroke="#b4c4ce"
+      stroke-width="1"
+      stroke-opacity=".8"
+    >
+      <path d="M552 468L618 411H728"/>
+      <path d="M299 524V591L244 619H137"/>
+    </g>
+
+    <g
+      fill="#c1cdd4"
+      font-family="'DM Sans', Arial, sans-serif"
+      font-size="11"
+      font-weight="500"
+      letter-spacing=".5"
+    >
+      <text x="628" y="399">CONDUIT + FIBER</text>
+      <text x="137" y="639">UNDERGROUND INSTALLATION</text>
+    </g>
+  </g>
+
+  <!-- ================================================================
+       PERMIT / ROUTE REQUIREMENTS AND REVIEW
+       ================================================================ -->
+  <g class="assembly-frame">
+
+    <!-- A coordinated approval envelope around the crossing -->
+    <path
+      d="M387 250L481 297L570 252L476 205Z"
+      fill="#7ca0b6"
+      fill-opacity=".1"
+      stroke="#a9c2d1"
+      stroke-width="1.5"
+      stroke-dasharray="5 5"
+    />
+
+    <!-- Projection toward the installation corridor -->
+    <g
+      fill="none"
+      stroke="#9db5c4"
+      stroke-opacity=".55"
+      stroke-width="1"
+      stroke-dasharray="3 5"
+    >
+      <path d="M387 250V354"/>
+      <path d="M481 297V401"/>
+      <path d="M570 252V356"/>
+    </g>
+
+    <!-- Connector between route and review information -->
+    <path
+      d="M528 250L584 222V180"
+      fill="none"
+      stroke="#9db5c4"
+      stroke-width="1.5"
+    />
+    <circle cx="528" cy="250" r="3" fill="#b9cedb"/>
+
+    <!-- Restrained review document -->
+    <g class="permit-document">
+      <path
+        d="M562 63H720V201H562Z"
+        fill="#1d3544"
+        stroke="#7895a8"
+        stroke-width="1"
+      />
+
+      <path
+        d="M562 63H720V96H562Z"
+        fill="#365e79"
+      />
+
+      <text
+        x="577"
+        y="84"
+        fill="#f4f3ef"
+        font-family="'DM Sans', Arial, sans-serif"
+        font-size="10"
+        font-weight="600"
+        letter-spacing=".9"
+      >PERMIT COORDINATION</text>
+
+      <g
+        fill="none"
+        stroke="#9db6c6"
+        stroke-width="1"
+      >
+        <rect x="578" y="113" width="7" height="7"/>
+        <rect x="578" y="139" width="7" height="7"/>
+        <rect x="578" y="165" width="7" height="7"/>
+        <path d="M581.5 120V139M581.5 146V165" opacity=".5"/>
+      </g>
+
+      <g
+        fill="#d7e1e6"
+        font-family="'DM Sans', Arial, sans-serif"
+        font-size="10"
+        font-weight="400"
+      >
+        <text x="596" y="120">Prepare submission</text>
+        <text x="596" y="146">Coordinate review</text>
+        <text x="596" y="172">Address conditions</text>
+      </g>
+
+      <path
+        d="M578 187H704"
+        fill="none"
+        stroke="#7895a8"
+        stroke-opacity=".4"
+      />
+    </g>
+
+    <!-- Crossing coordination annotation -->
+    <path
+      d="M476 205L443 167H334"
+      fill="none"
+      stroke="#9db5c4"
+      stroke-width="1"
+    />
+    <text
+      x="334"
+      y="155"
+      fill="#b9cbd6"
+      font-family="'DM Sans', Arial, sans-serif"
+      font-size="10"
+      font-weight="500"
+      letter-spacing=".5"
+    >CROSSING COORDINATION</text>
+  </g>
+
+  <!-- ================================================================
+       DESIGN / CORRIDOR PLAN AND PROPOSED TELECOM ALIGNMENT
+       ================================================================ -->
+  <g class="assembly-design">
+
+    <!-- Floating corridor surface -->
+    <path
+      d="M91 278L421 443V460L91 295Z"
+      fill="#8c9da6"
+    />
+    <path
+      d="M421 443L728 289V306L421 460Z"
+      fill="#536d7c"
+    />
+    <path
+      d="M91 278L398 124L728 289L421 443Z"
+      fill="#e3e7e5"
+    />
+
+    <!-- Site parcels: quiet context, not decorative micro-detail -->
+    <g
+      fill="#cbd4d3"
+      fill-opacity=".55"
+      stroke="#97a9af"
+      stroke-width="1"
+      stroke-opacity=".5"
+    >
+      <path d="M123 278L221 229L277 257L179 306Z"/>
+      <path d="M241 219L339 170L395 198L297 247Z"/>
+      <path d="M441 342L540 293L596 321L497 370Z"/>
+      <path d="M559 283L657 234L696 254L598 303Z"/>
+    </g>
+
+    <!-- Main road corridor -->
+    <path
+      d="M204 334L511 180L604 227L297 381Z"
+      fill="#71848d"
+    />
+
+    <!-- Road edges -->
+    <g
+      fill="none"
+      stroke="#f2f3ef"
+      stroke-width="1.7"
+      stroke-opacity=".85"
+    >
+      <path d="M218 334L511 187"/>
+      <path d="M297 374L590 227"/>
+    </g>
+
+    <!-- Road centerline -->
+    <path
+      d="M252 357L558 204"
+      fill="none"
+      stroke="#dce3e3"
+      stroke-width="1.5"
+      stroke-dasharray="13 10"
+      stroke-opacity=".85"
+    />
+
+    <!-- Right-of-way boundaries -->
+    <g
+      class="right-of-way"
+      fill="none"
+      stroke="#365e79"
+      stroke-opacity=".6"
+      stroke-width="1"
+      stroke-dasharray="6 5"
+    >
+      <path d="M180 322L487 168"/>
+      <path d="M321 393L628 239"/>
+    </g>
+
+    <!-- Existing utility crossing -->
+    <path
+      d="M272 234L548 372"
+      fill="none"
+      stroke="#8e9692"
+      stroke-width="3"
+      stroke-dasharray="5 6"
+    />
+
+    <!-- Proposed telecom route -->
+    <path
+      class="design-primary-alignment"
+      d="M161 296L290 360L470 270L560 315L652 269"
+      fill="none"
+      stroke="#f4f3ef"
+      stroke-width="10"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+    <path
+      class="proposed-telecom-route"
+      d="M161 296L290 360L470 270L560 315L652 269"
+      fill="none"
+      stroke="#294f69"
+      stroke-width="4"
+      stroke-linecap="square"
+      stroke-linejoin="miter"
+    />
+
+    <!-- Proposed access points -->
+    <g fill="#f4f3ef" stroke="#294f69" stroke-width="2">
+      <path d="M153 296L161 292L169 296L161 300Z"/>
+      <path d="M282 360L290 356L298 360L290 364Z"/>
+      <path d="M462 270L470 266L478 270L470 274Z"/>
+      <path d="M644 269L652 265L660 269L652 273Z"/>
+    </g>
+
+    <!-- Meaningful plan annotations -->
+    <g
+      fill="none"
+      stroke="#496575"
+      stroke-width="1"
+    >
+      <path d="M212 321L147 354H69"/>
+      <path d="M652 269L704 243H774"/>
+      <path d="M318 207L275 185H157"/>
+    </g>
+
+    <g
+      fill="#d2dce2"
+      font-family="'DM Sans', Arial, sans-serif"
+      font-size="10"
+      font-weight="500"
+      letter-spacing=".55"
+    >
+      <text x="69" y="374">PROPOSED FIBER ROUTE</text>
+      <text x="689" y="230">ACCESS POINT</text>
+      <text x="157" y="172">RIGHT-OF-WAY</text>
+    </g>
+
+    <!-- Surface edge highlight -->
+    <path
+      d="M91 278L421 443L728 289"
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="1"
+      stroke-opacity=".65"
+    />
+  </g>
+</symbol>
     </defs>
   </svg>
 
@@ -299,11 +627,16 @@
             role="img"
             aria-labelledby="hero-art-title hero-art-description"
           >
-            <title id="hero-art-title">Three disciplines, one coordinated structure</title>
-            <desc id="hero-art-description">
-              An abstract architectural composition brings a design plane,
-              a vertical approval frame, and a construction foundation together.
-            </desc>
+           <title id="hero-art-title">
+  Telecom infrastructure, from route design to underground installation
+</title>
+<desc id="hero-art-description">
+  A conceptual road corridor shows a proposed fiber route, right-of-way
+  boundaries, and access points. A permit coordination panel connects
+  the planned work to submission and review. Below the surface,
+  a cutaway reveals conduit, fiber, and an underground access structure.
+  This illustration is conceptual and not to scale.
+</desc>
             <use href="#infrastructure-assembly"/>
           </svg>
 
