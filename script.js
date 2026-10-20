@@ -12,15 +12,44 @@
     "(prefers-reduced-motion: reduce)"
   );
 
+  /* ======================================================================
+     01 / INDEPENDENT GRAPHIC ASSEMBLIES
+     Expand the shared symbol so each illustration's internal groups can
+     respond independently to its surrounding CSS state.
+     ====================================================================== */
+
+  const assemblySymbol = document.querySelector(
+    "#infrastructure-assembly"
+  );
+
+  if (assemblySymbol) {
+    document
+      .querySelectorAll('use[href="#infrastructure-assembly"]')
+      .forEach((instance) => {
+        const group = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "g"
+        );
+
+        group.classList.add("assembly-instance");
+
+        [...assemblySymbol.children].forEach((child) => {
+          group.appendChild(child.cloneNode(true));
+        });
+
+        instance.replaceWith(group);
+      });
+  }
+
+  /* ======================================================================
+     02 / MOBILE NAVIGATION
+     ====================================================================== */
+
   let menuIsOpen = false;
   let focusBeforeMenu = null;
   let previousBodyOverflow = "";
 
-  const inertStates = new Map();
-
-  /* ======================================================================
-     01 / MOBILE NAVIGATION
-     ====================================================================== */
+  const backgroundInertStates = new Map();
 
   const getNavigationLinks = () => {
     if (!navigation) return [];
@@ -32,13 +61,17 @@
     [main, footer].forEach((element) => {
       if (!element) return;
 
-      inertStates.set(element, element.hasAttribute("inert"));
+      backgroundInertStates.set(
+        element,
+        element.hasAttribute("inert")
+      );
+
       element.setAttribute("inert", "");
     });
   };
 
   const unlockBackground = () => {
-    inertStates.forEach((wasInert, element) => {
+    backgroundInertStates.forEach((wasInert, element) => {
       if (wasInert) {
         element.setAttribute("inert", "");
       } else {
@@ -46,7 +79,7 @@
       }
     });
 
-    inertStates.clear();
+    backgroundInertStates.clear();
   };
 
   const closeMenu = ({ restoreFocus = false } = {}) => {
@@ -129,7 +162,6 @@
 
   if (header && menuToggle && navigation) {
     header.classList.add("nav-ready");
-
     synchronizeNavigation();
 
     menuToggle.addEventListener("click", () => {
@@ -188,8 +220,96 @@
   }
 
   /* ======================================================================
-     02 / SAME-PAGE NAVIGATION
-     Keep native scrolling, browser history, and reduced-motion behavior.
+     03 / SECTION REVEALS
+     All content is visible unless enhancement initializes successfully.
+     ====================================================================== */
+
+  const revealElements = [
+    ...document.querySelectorAll("[data-reveal]")
+  ];
+
+  let revealObserver = null;
+  let revealSafetyTimer = null;
+
+  const showElement = (element) => {
+    element.classList.add("is-visible");
+    revealObserver?.unobserve(element);
+  };
+
+  const revealTarget = (target) => {
+    const parentReveal = target.closest?.("[data-reveal]");
+
+    if (parentReveal) {
+      showElement(parentReveal);
+    }
+
+    target.querySelectorAll?.("[data-reveal]").forEach(showElement);
+  };
+
+  const showAllContent = () => {
+    revealObserver?.disconnect();
+    window.clearTimeout(revealSafetyTimer);
+
+    revealElements.forEach((element) => {
+      element.classList.add("is-visible");
+    });
+
+    document.documentElement.classList.remove("reveal-ready");
+  };
+
+  const initializeReveals = () => {
+    if (
+      reducedMotion.matches ||
+      !("IntersectionObserver" in window) ||
+      !revealElements.length
+    ) {
+      return;
+    }
+
+    try {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              showElement(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0,
+          rootMargin: "0px 0px 60px 0px"
+        }
+      );
+
+      revealElements.forEach((element) => {
+        if (element.getBoundingClientRect().top < window.innerHeight) {
+          element.classList.add("is-visible");
+        } else {
+          revealObserver.observe(element);
+        }
+      });
+
+      document.documentElement.classList.add("reveal-ready");
+
+      revealSafetyTimer = window.setTimeout(showAllContent, 15000);
+    } catch {
+      showAllContent();
+    }
+  };
+
+  initializeReveals();
+
+  document.addEventListener("focusin", (event) => {
+    const revealElement = event.target.closest?.("[data-reveal]");
+
+    if (revealElement) {
+      showElement(revealElement);
+    }
+  });
+
+  /* ======================================================================
+     04 / NATIVE ANCHOR NAVIGATION
+     Preserve browser scrolling, URL fragments, and modifier-key behavior.
      ====================================================================== */
 
   const focusSection = (section) => {
@@ -249,220 +369,230 @@
 
     revealTarget(target);
     focusSection(target);
-
-    // Do not preventDefault: the anchor retains native URL and scroll behavior.
   });
 
   /* ======================================================================
-     03 / HEADER SCROLL STATE
-     The stylesheet keeps the header in normal flow when it becomes sticky.
+     05 / HERO ASSEMBLY
+     A single entrance sequence. No loops or continuous rendering.
      ====================================================================== */
 
-  let headerUpdatePending = false;
+  const hero = document.querySelector(".hero");
+  const heroAssembly = document.querySelector(
+    ".hero-assembly .assembly-instance"
+  );
 
-  const updateHeader = () => {
-    header?.classList.toggle("is-scrolled", window.scrollY > 48);
-    headerUpdatePending = false;
+  let heroFrameOne = null;
+  let heroFrameTwo = null;
+  let heroSafetyTimer = null;
+
+  const settleHero = () => {
+    window.cancelAnimationFrame(heroFrameOne);
+    window.cancelAnimationFrame(heroFrameTwo);
+    window.clearTimeout(heroSafetyTimer);
+
+    hero?.classList.remove("is-preparing", "is-assembled");
   };
 
-  if (header) {
-    updateHeader();
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (headerUpdatePending) return;
-
-        headerUpdatePending = true;
-        window.requestAnimationFrame(updateHeader);
-      },
-      { passive: true }
-    );
-  }
-
-  /* ======================================================================
-     04 / RESTRAINED SECTION REVEALS
-     Content is visible by default. Animation is optional enhancement.
-     ====================================================================== */
-
-  const revealElements = [
-    ...document.querySelectorAll("[data-reveal]")
-  ];
-
-  let revealObserver = null;
-  let revealSafetyTimer = null;
-
-  const showElement = (element) => {
-    element.classList.add("is-visible");
-    revealObserver?.unobserve(element);
-  };
-
-  function revealTarget(target) {
-    const parentReveal = target.closest?.("[data-reveal]");
-
-    if (parentReveal) {
-      showElement(parentReveal);
-    }
-
-    if (target.matches?.("[data-reveal]")) {
-      showElement(target);
-    }
-
-    target.querySelectorAll?.("[data-reveal]").forEach(showElement);
-  }
-
-  const showAllContent = () => {
-    revealObserver?.disconnect();
-    window.clearTimeout(revealSafetyTimer);
-
-    revealElements.forEach((element) => {
-      element.classList.add("is-visible");
-    });
-
-    document.documentElement.classList.remove("reveal-ready");
-  };
-
-  const initializeReveals = () => {
+  const initializeHero = () => {
     if (
+      !hero ||
+      !heroAssembly ||
       reducedMotion.matches ||
-      !("IntersectionObserver" in window) ||
-      !revealElements.length
+      document.hidden ||
+      window.scrollY > window.innerHeight * 0.5
     ) {
       return;
     }
 
-    try {
-      revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              showElement(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0,
-          rootMargin: "0px 0px 60px 0px"
-        }
-      );
+    hero.classList.add("is-preparing");
 
-      revealElements.forEach((element) => {
-        const bounds = element.getBoundingClientRect();
-
-        // Leave already visible content untouched during initialization.
-        if (bounds.top < window.innerHeight) {
-          element.classList.add("is-visible");
-        } else {
-          revealObserver.observe(element);
+    heroFrameOne = window.requestAnimationFrame(() => {
+      heroFrameTwo = window.requestAnimationFrame(() => {
+        if (reducedMotion.matches || document.hidden) {
+          settleHero();
+          return;
         }
+
+        hero.classList.add("is-assembled");
+        hero.classList.remove("is-preparing");
       });
+    });
 
-      document.documentElement.classList.add("reveal-ready");
-
-      // Fail open rather than leaving content hidden indefinitely.
-      revealSafetyTimer = window.setTimeout(showAllContent, 15000);
-    } catch {
-      showAllContent();
-    }
+    heroSafetyTimer = window.setTimeout(settleHero, 2400);
   };
 
-  initializeReveals();
-
-  document.addEventListener("focusin", (event) => {
-    const revealElement = event.target.closest?.("[data-reveal]");
-
-    if (revealElement) {
-      showElement(revealElement);
-    }
-  });
+  initializeHero();
 
   /* ======================================================================
-     05 / OPTIONAL PHOTOGRAPHY
-     Keep the graphic fallback when an image has not been supplied.
+     06 / CAPABILITY STORY
+     Read scroll position only when requested; update only on state changes.
      ====================================================================== */
 
-  const optionalImages = [
-    ...document.querySelectorAll(
-      ".hero-image-frame > img, .capabilities-media > img"
-    )
+  const capabilityStory = document.querySelector(
+    "[data-capability-story]"
+  );
+
+  const capabilityStage = document.querySelector(".capability-stage");
+
+  const capabilityPassages = [
+    ...document.querySelectorAll(".capability-passage[data-discipline]")
   ];
 
-  optionalImages.forEach((image) => {
-    const frame = image.parentElement;
+  const stageLabel = capabilityStage?.querySelector(".stage-label");
+  const stageCount = capabilityStage?.querySelector(".stage-count");
 
-    const markImageLoaded = () => {
-      if (!image.naturalWidth) return;
+  const disciplineLabels = {
+    design: "Engineering & design",
+    permitting: "Permitting & coordination",
+    construction: "Construction & installation"
+  };
 
-      image.hidden = false;
-      frame?.classList.add("has-photograph");
-    };
+  let activeDiscipline = "";
 
-    const markImageMissing = () => {
-      image.hidden = true;
-      frame?.classList.remove("has-photograph");
-    };
+  const setActiveDiscipline = (passage, index) => {
+    if (!capabilityStage || !passage) return;
 
-    image.addEventListener("load", markImageLoaded);
-    image.addEventListener("error", markImageMissing);
+    const discipline = passage.dataset.discipline;
 
-    if (image.complete) {
-      if (image.naturalWidth) {
-        markImageLoaded();
-      } else {
-        markImageMissing();
-      }
+    if (!discipline || discipline === activeDiscipline) return;
+
+    activeDiscipline = discipline;
+    capabilityStage.dataset.activeDiscipline = discipline;
+
+    if (stageLabel) {
+      stageLabel.textContent =
+        disciplineLabels[discipline] || discipline;
     }
-  });
 
-  /* ======================================================================
-     06 / PROTOTYPE FORM
-     Never imply that an inquiry has been sent.
-     ====================================================================== */
+    if (stageCount) {
+      const current = String(index + 1).padStart(2, "0");
+      const total = String(capabilityPassages.length).padStart(2, "0");
 
-  const projectForm = document.querySelector("#project-form");
-  const formNotice = document.querySelector("#form-notice");
+      stageCount.textContent = `${current} / ${total}`;
+    }
 
-  if (projectForm) {
-    projectForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+    capabilityPassages.forEach((item) => {
+      item.classList.toggle("is-active", item === passage);
+    });
+  };
 
-      if (formNotice) {
-        formNotice.setAttribute("role", "status");
-        formNotice.textContent =
-          "This is a private preview. Inquiry submission is not connected, " +
-          "and no project information has been sent.";
+  const updateCapabilityStory = () => {
+    if (
+      !capabilityStory ||
+      !capabilityStage ||
+      !capabilityPassages.length
+    ) {
+      return;
+    }
+
+    const headerHeight =
+      header?.getBoundingClientRect().height || 0;
+
+    const readingLine =
+      headerHeight +
+      Math.max(0, window.innerHeight - headerHeight) * 0.48;
+
+    let activeIndex = 0;
+
+    capabilityPassages.forEach((passage, index) => {
+      if (passage.getBoundingClientRect().top <= readingLine) {
+        activeIndex = index;
       }
     });
+
+    setActiveDiscipline(
+      capabilityPassages[activeIndex],
+      activeIndex
+    );
+  };
+
+  /* ======================================================================
+     07 / SHARED SCROLL & RESIZE SCHEDULER
+     ====================================================================== */
+
+  let viewportFrame = null;
+
+  const updateViewport = () => {
+    viewportFrame = null;
+
+    header?.classList.toggle("is-scrolled", window.scrollY > 48);
+
+    updateCapabilityStory();
+  };
+
+  const scheduleViewportUpdate = () => {
+    if (viewportFrame !== null) return;
+
+    viewportFrame = window.requestAnimationFrame(updateViewport);
+  };
+
+  updateViewport();
+
+  window.addEventListener("scroll", scheduleViewportUpdate, {
+    passive: true
+  });
+
+  window.addEventListener("resize", scheduleViewportUpdate, {
+    passive: true
+  });
+
+  window.addEventListener("load", scheduleViewportUpdate, {
+    once: true
+  });
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(scheduleViewportUpdate).catch(() => {});
   }
 
   /* ======================================================================
-     07 / PREFERENCES & PAGE LIFECYCLE
+     08 / USER PREFERENCES & PAGE LIFECYCLE
      ====================================================================== */
 
   reducedMotion.addEventListener("change", (event) => {
     if (event.matches) {
+      settleHero();
       showAllContent();
+    }
+
+    scheduleViewportUpdate();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      settleHero();
+    } else {
+      scheduleViewportUpdate();
     }
   });
 
-  window.addEventListener("beforeprint", showAllContent);
+  window.addEventListener("beforeprint", () => {
+    settleHero();
+    showAllContent();
+  });
 
   window.addEventListener("pagehide", () => {
     closeMenu();
+    settleHero();
     showAllContent();
+
+    if (viewportFrame !== null) {
+      window.cancelAnimationFrame(viewportFrame);
+      viewportFrame = null;
+    }
   });
 
   window.addEventListener("pageshow", (event) => {
     if (event.persisted) {
       synchronizeNavigation();
+      settleHero();
       showAllContent();
     }
 
-    updateHeader();
+    scheduleViewportUpdate();
   });
 
   /* ======================================================================
-     08 / COPYRIGHT
+     09 / COPYRIGHT
      ====================================================================== */
 
   const copyrightYear = document.querySelector("#copyright-year");
